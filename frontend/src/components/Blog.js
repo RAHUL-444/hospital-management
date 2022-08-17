@@ -43,59 +43,41 @@ const Blog = ({
       .then(() => navigate("/"))
       .then(() => navigate("/blogs"));
   };
-  let departmentName='';
-  if(department==='10'){
-   departmentName="Cardiology";
-  }else if(department==="20"){
-    departmentName="Orthopedics";
-   }else if(department==="30"){
-    departmentName="Radiology";
-   }else if(department==="40"){
-    departmentName="Neurology";
-   }else if(department==='50'){
-    departmentName="General Medicine";
-   }else if(department==='60'){
-    departmentName="ENT";
-   } else {
-    departmentName="None";
-   }
+  let departmentName = "";
+  if (department === "10") {
+    departmentName = "Cardiology";
+  } else if (department === "20") {
+    departmentName = "Orthopedics";
+  } else if (department === "30") {
+    departmentName = "Radiology";
+  } else if (department === "40") {
+    departmentName = "Neurology";
+  } else if (department === "50") {
+    departmentName = "General Medicine";
+  } else if (department === "60") {
+    departmentName = "ENT";
+  } else {
+    departmentName = "None";
+  }
   return (
-    <div style={{
-      // backgroundImage: `url(${
-      //   process.env.PUBLIC_URL + "/img/home-bg.jpg"
-      // })`,
-      // backgroundRepeat: "no-repeat",
-      // height: "100vh",
-      // backgroundPosition: "center",
-      // height: "100vh",
-      // backgroundSize: "cover",
-      display : "flex",
-    }}>
-      {" "}
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
       <Card
         sx={{
-          // width: "25%",
           margin: "30px",
-          display:"flex",
+          display: "flex",
           mt: 2,
           padding: 2,
           boxShadow: "5px 5px 10px 10px",
           ":hover": {
-            boxShadow: "10px 10px 20px 20px"
+            boxShadow: "10px 10px 20px 20px",
           },
+          backgroundColor:"yellow"
         }}
       >
-        {/* {isUser && (
-          <Box display="flex">
-            <IconButton onClick={handleEdit} sx={{ marginLeft: "auto" }}>
-              <ModeEditOutlineIcon color="warning" />
-            </IconButton>
-            <IconButton onClick={handleDelete}>
-              <DeleteForeverIcon color="error" />
-            </IconButton>
-          </Box>
-        )} */}
-        
         <CardContent>
           <hr />
           <br />
@@ -111,7 +93,7 @@ const Blog = ({
             <b> Department: </b> {departmentName}
           </Typography>
         </CardContent>
-      </Card>{" "}
+      </Card>
     </div>
   );
 };

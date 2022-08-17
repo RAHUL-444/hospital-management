@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Blog from "./Blog";
 import Header from "./Header";
+import { useStyles } from "./utils";
+import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
 const UserBlogs = () => {
   const [user, setUser] = useState();
+  const classes = useStyles();
   const id = localStorage.getItem("userId");
   const sendRequest = async () => {
     const res = await axios
@@ -16,49 +19,52 @@ const UserBlogs = () => {
     sendRequest().then((data) => setUser(data.user));
   }, []);
   console.log(user);
-  return (<div style={{
-    // backgroundImage: `url(${
-    //   process.env.PUBLIC_URL + "/img/home-bg.jpg"
-    // })`,
-    // backgroundRepeat: "no-repeat",
-    // height: "100vh",
-    // backgroundPosition: "center",
-    height: "100vh",
-    // backgroundSize,: "cover",
-    // display : "flex",
-    // marginTop:"10px",      
-  }}>
-    <Header/>
-    <div style={{
-      // backgroundImage: `url(${
-      //   process.env.PUBLIC_URL + "/img/home-bg.jpg"
-      // })`,
-      // backgroundRepeat: "no-repeat",
-      // height: "100vh",
-      // backgroundPosition: "center",
-      // 
-      // backgroundSize: "cover",
-      display : "flex",
-      marginTop:"10px",      
-
-    }} >
-      {" "}
-      {user &&
-        user.blogs &&
-        user.blogs.map((blog, index) => (
-          <Blog
-            id={blog._id}
-            key={index}
-            isUser={true}
-            title={blog.title}
-            description={blog.description}
-            userName={user.name}
-            email={user.email}
-            department={blog.department}
-          />
-        ))}
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${
+          process.env.PUBLIC_URL + "/img/home-bg.jpg"
+        })`,
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
+      <Header />
+      <Typography
+        className={classes.font}
+        fontWeight={"bold"}
+        padding={3}
+        color="grey"
+        variant="h2"
+        textAlign={"center"}
+      >
+        <u>All Appointment</u>
+      </Typography>{" "}
+      <div
+        style={{
+          display: "flex",
+          marginTop: "10px",
+          justifyContent: "center",
+        }}
+      >
+        {user &&
+          user.blogs &&
+          user.blogs.map((blog, index) => (
+            <Blog
+              id={blog._id}
+              key={index}
+              isUser={true}
+              title={blog.title}
+              description={blog.description}
+              userName={user.name}
+              email={user.email}
+              department={blog.department}
+            />
+          ))}
+      </div>
     </div>
-    </div >
   );
 };
 

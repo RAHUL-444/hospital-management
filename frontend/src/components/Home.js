@@ -14,7 +14,6 @@ const Home = () => {
           backgroundRepeat: "no-repeat",
           height: "100vh",
           backgroundPosition: "center",
-          height: "100vh",
           backgroundSize: "cover",
         }}
       >
