@@ -1,12 +1,27 @@
-import React from 'react'
-import Header from './Header'
-
+import React from "react";
+import Header from "./Header";
+// import background from "../content/img/home-bg.jpg";
 
 const Home = () => {
-    console.log("Htting");
+  console.log("Htting");
   return (
-    <><Header/></>
-  )
-}
+    <>
+      <div
+        style={{
+          backgroundImage: `url(${
+            process.env.PUBLIC_URL + "/img/home-bg.jpg"
+          })`,
+          backgroundRepeat: "no-repeat",
+          height: "100vh",
+          backgroundPosition: "center",
+          height: "100vh",
+          backgroundSize: "cover",
+        }}
+      >
+        <Header />
+      </div>
+    </>
+  );
+};
 
-export default Home
+export default Home;

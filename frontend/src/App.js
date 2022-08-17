@@ -21,20 +21,22 @@ function App() {
   }, [dispath]);
   return (
     <>
-      <Routes>
-        {/* {isLoggedIn ? (
-          <Route path="/auth" element={<Auth />} />
-        ) : ( */}
-      
-            <Route exact path="/" element={<Home />}>
-              <Route path="./" element={<Blogs />} />
-              <Route path="/blogs/add" element={<AddBlog />} />
-              <Route path="/myBlogs" element={<UserBlogs />} />
-              <Route path="/myBlogs/:id" element={<BlogDetail />} />{" "}
-            </Route>
+    
+        <Routes>
+          {/* {isLoggedIn ? (
           
-        {/* )} */}
-      </Routes>
+        ) : ( */}
+          <Route path={`${process.env.PUBLIC_URL + "/"}`} element={<Home />} />
+          <Route path="./" element={<Blogs />} />
+          <Route path="/Appointment/Create-Appointment" element={<AddBlog />} />
+          <Route path="/Appointments" element={<UserBlogs />} />
+          <Route path="/Appointments/:id" element={<BlogDetail />} />{" "}
+          <Route
+            path={`${process.env.PUBLIC_URL + "/auth"}`}
+            element={<Auth />}
+          />
+        </Routes>
+      
     </>
   );
 }

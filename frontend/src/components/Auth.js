@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
+import Header from "./Header";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +14,6 @@ const Auth = () => {
     name: "",
     email: "",
     password: "",
-   
   });
   const [isSignup, setIsSignup] = useState(false);
   const handleChange = (e) => {
@@ -23,9 +23,6 @@ const Auth = () => {
     }));
   };
   const sendRequest = async (type = "login") => {
-
- 
-
     const res = await axios
       .post(`http://localhost:5000/api/user/${type}`, {
         name: inputs.name,
@@ -35,7 +32,7 @@ const Auth = () => {
       .catch((err) => console.log(err));
 
     const data = await res.data;
-    console.log(data);
+    console.log("send Request received", data);
     return data;
   };
 
@@ -46,16 +43,18 @@ const Auth = () => {
       sendRequest("signup")
         .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispath(authActions.login()))
-        .then(() => naviagte("/blogs"));
+        .then(() => naviagte("/"));
     } else {
       sendRequest()
         .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispath(authActions.login()))
-        .then(() => naviagte("/blogs"));
+        .then(() => naviagte("/"));
     }
   };
   return (
-    <div>
+    <>
+      <Header />
+      
       <form onSubmit={handleSubmit}>
         <Box
           maxWidth={400}
@@ -96,16 +95,22 @@ const Auth = () => {
             type={"password"}
             placeholder="Password"
             margin="normal"
-          /> {isSignup && (
-           <TextField
-            name="password"
-            // onChange={handleChange}
-            value={inputs.confirm_password}
-            type={"password"}
-            placeholder="Confirm Password"
-            margin="normal"
-          /> )}{" "}
-          {!isSignup && (<Typography sx={{color:'blue',fontSize:'15px'}}>Forgot Password?</Typography>)}
+          />{" "}
+          {isSignup && (
+            <TextField
+              name="password"
+              // onChange={handleChange}
+              value={inputs.confirm_password}
+              type={"password"}
+              placeholder="Confirm Password"
+              margin="normal"
+            />
+          )}{" "}
+          {!isSignup && (
+            <Typography sx={{ color: "blue", fontSize: "15px" }}>
+              Forgot Password?
+            </Typography>
+          )}
           <Button
             type="submit"
             variant="contained"
@@ -114,17 +119,15 @@ const Auth = () => {
           >
             Submit
           </Button>
-          
           <Button
             onClick={() => setIsSignup(!isSignup)}
             sx={{ borderRadius: 3, marginTop: 3 }}
           >
-             {isSignup ? "Already have an account, Login" : "Create New Account"}
+            {isSignup ? "Already have an account, Login" : "Create New Account"}
           </Button>
-          
         </Box>
       </form>
-    </div>
+    </>
   );
 };
 

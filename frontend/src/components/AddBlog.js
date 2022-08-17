@@ -3,6 +3,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStyles } from "./utils";
+import Header from "./Header";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const AddBlog = () => {
@@ -11,7 +15,7 @@ const AddBlog = () => {
   const [inputs, setInputs] = useState({
     title: "",
     description: "",
-    imageURL: "",
+    department: "",
   });
   const handleChange = (e) => {
     setInputs((prevState) => ({
@@ -24,7 +28,7 @@ const AddBlog = () => {
       .post("http://localhost:5000/api/blog/add", {
         title: inputs.title,
         description: inputs.description,
-        image: inputs.imageURL,
+        department: inputs.department,
         user: localStorage.getItem("userId"),
       })
       .catch((err) => console.log(err));
@@ -36,9 +40,10 @@ const AddBlog = () => {
     console.log(inputs);
     sendRequest()
       .then((data) => console.log(data))
-      .then(() => navigate("/blogs"));
+      .then(() => navigate("/Appointments"));
   };
-  return (
+  return (<>
+    <Header/>
     <div>
       <form onSubmit={handleSubmit}>
         <Box
@@ -51,7 +56,7 @@ const AddBlog = () => {
           marginTop={3}
           display="flex"
           flexDirection={"column"}
-          width={"80%"}
+          width={"50%"}
         >
           <Typography
             className={classes.font}
@@ -61,7 +66,7 @@ const AddBlog = () => {
             variant="h2"
             textAlign={"center"}
           >
-           Feed
+            Create Appointment
           </Typography>
           <InputLabel className={classes.font} sx={labelStyles}>
             Disease
@@ -85,18 +90,29 @@ const AddBlog = () => {
             margin="auto"
             variant="outlined"
           />
-          
           <InputLabel className={classes.font} sx={labelStyles}>
             Department
           </InputLabel>
-          <TextField
-            className={classes.font}
-            name="description"
-            onChange={handleChange}
-            value={inputs.description}
-            margin="auto"
-            variant="outlined"
-          />
+          <Box>
+            <FormControl fullWidth>
+              <Select
+                className={classes.font}
+                name="department"
+                value={inputs.department}
+                label="Department"
+                onChange={handleChange}
+                margin="auto"
+                variant="outlined"
+              >
+                <MenuItem value={10}>Cardiology</MenuItem>
+                <MenuItem value={20}>Orthopedics</MenuItem>
+                <MenuItem value={30}>Radiology/Pathology</MenuItem>
+                <MenuItem value={40}>Neurology</MenuItem>
+                <MenuItem value={50}>General Medicine</MenuItem>
+                <MenuItem value={60}>ENT</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
           <Button
             sx={{ mt: 2, borderRadius: 2 }}
             variant="contained"
@@ -108,13 +124,8 @@ const AddBlog = () => {
         </Box>
       </form>
     </div>
+    </>
   );
 };
 
 export default AddBlog;
-
-
-
-
-
-

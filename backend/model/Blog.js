@@ -11,9 +11,13 @@ const blogSchema = new Schema({
     type: String,
     required: true,
   },
-  image: {
+  department: {
     type: String,
     required: true,
+  },
+  image: {
+    type: String,
+    required: false,
   },
   user: {
     type: mongoose.Types.ObjectId,

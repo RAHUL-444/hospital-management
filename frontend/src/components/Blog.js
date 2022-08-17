@@ -1,5 +1,6 @@
 import {
   Avatar,
+  backdropClasses,
   Box,
   Card,
   CardContent,
@@ -14,7 +15,17 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useStyles } from "./utils";
-const Blog = ({ title, description, imageURL, userName, isUser, id,email }) => {
+import { blueGrey } from "@mui/material/colors";
+const Blog = ({
+  title,
+  description,
+  imageURL,
+  userName,
+  isUser,
+  id,
+  department,
+  email,
+}) => {
   const classes = useStyles();
   const navigate = useNavigate();
   const handleEdit = () => {
@@ -32,22 +43,49 @@ const Blog = ({ title, description, imageURL, userName, isUser, id,email }) => {
       .then(() => navigate("/"))
       .then(() => navigate("/blogs"));
   };
+  let departmentName='';
+  if(department==='10'){
+   departmentName="Cardiology";
+  }else if(department==="20"){
+    departmentName="Orthopedics";
+   }else if(department==="30"){
+    departmentName="Radiology";
+   }else if(department==="40"){
+    departmentName="Neurology";
+   }else if(department==='50'){
+    departmentName="General Medicine";
+   }else if(department==='60'){
+    departmentName="ENT";
+   } else {
+    departmentName="None";
+   }
   return (
-    <div>
+    <div style={{
+      // backgroundImage: `url(${
+      //   process.env.PUBLIC_URL + "/img/home-bg.jpg"
+      // })`,
+      // backgroundRepeat: "no-repeat",
+      // height: "100vh",
+      // backgroundPosition: "center",
+      // height: "100vh",
+      // backgroundSize: "cover",
+      display : "flex",
+    }}>
       {" "}
       <Card
         sx={{
-          width: "40%",
-          margin: "auto",
+          // width: "25%",
+          margin: "30px",
+          display:"flex",
           mt: 2,
           padding: 2,
-          boxShadow: "5px 5px 10px #ccc",
+          boxShadow: "5px 5px 10px 10px",
           ":hover": {
-            boxShadow: "10px 10px 20px #ccc",
+            boxShadow: "10px 10px 20px 20px"
           },
         }}
       >
-        {isUser && (
+        {/* {isUser && (
           <Box display="flex">
             <IconButton onClick={handleEdit} sx={{ marginLeft: "auto" }}>
               <ModeEditOutlineIcon color="warning" />
@@ -56,27 +94,8 @@ const Blog = ({ title, description, imageURL, userName, isUser, id,email }) => {
               <DeleteForeverIcon color="error" />
             </IconButton>
           </Box>
-        )}
-        <CardHeader
-          avatar={
-            <Avatar
-              className={classes.font}
-              sx={{ bgcolor: "red" }}
-              aria-label="recipe"
-            >
-              {userName ? userName.charAt(0) : ""}
-            </Avatar>
-          }
-          title={title}
-          email={email}
-        />
-        <CardMedia
-          component="img"
-          height="194"
-          image={imageURL}
-          alt="Paella dish"
-        />
-
+        )} */}
+        
         <CardContent>
           <hr />
           <br />
@@ -85,10 +104,14 @@ const Blog = ({ title, description, imageURL, userName, isUser, id,email }) => {
             variant="body2"
             color="text.secondary"
           >
-            <b>{userName}</b> {": "} {description}
+            <b>User: </b> {userName}
+            <br />
+            <b> Description: </b> {description}
+            <br />
+            <b> Department: </b> {departmentName}
           </Typography>
         </CardContent>
-      </Card>
+      </Card>{" "}
     </div>
   );
 };

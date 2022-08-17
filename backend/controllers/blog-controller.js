@@ -16,8 +16,8 @@ export const getAllBlogs = async (req, res, next) => {
 };
 
 export const addBlog = async (req, res, next) => {
-  const { title, description, image, user } = req.body;
-
+  const { title, description,department, image, user } = req.body;
+  console.log('department',department)
   let existingUser;
   try {
     existingUser = await User.findById(user);
@@ -30,6 +30,7 @@ export const addBlog = async (req, res, next) => {
   const blog = new Blog({
     title,
     description,
+    department,
     image,
     user,
   });
