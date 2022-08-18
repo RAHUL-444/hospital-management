@@ -14,8 +14,11 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
     minlength: 6,
+  },
+  hashpassword: {
+    type: String,
+    minlength: 3,
   },
   blogs: [{ type: mongoose.Types.ObjectId, ref: "Blog", required: true }],
 });

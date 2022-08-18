@@ -3,11 +3,14 @@ import axios from "axios";
 import Blog from "./Blog";
 import Header from "./Header";
 import { useStyles } from "./utils";
-import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import {  selectUser } from "../store/index";
+import {  Typography } from "@mui/material";
 const UserBlogs = () => {
   const [user, setUser] = useState();
   const classes = useStyles();
-  const id = localStorage.getItem("userId");
+  const userstore = useSelector(selectUser);
+  const id = userstore.id
   const sendRequest = async () => {
     const res = await axios
       .get(`http://localhost:5000/api/blog/user/${id}`)
@@ -22,9 +25,7 @@ const UserBlogs = () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${
-          process.env.PUBLIC_URL + "/img/home-bg.jpg"
-        })`,
+        backgroundImage: `url(${process.env.PUBLIC_URL + "/img/home-bg.jpg"})`,
         backgroundRepeat: "no-repeat",
         height: "100vh",
         backgroundPosition: "center",

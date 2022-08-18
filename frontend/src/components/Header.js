@@ -10,14 +10,15 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "../store";
+import { login, logout, selectUser } from "../store/index";
 import { useStyles } from "./utils";
 const Header = () => {
   const classes = useStyles();
   const dispath = useDispatch();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isLoggedIn = useSelector(selectUser);
 
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("1");
+
   return (
     <AppBar
       position="sticky"
@@ -35,7 +36,6 @@ const Header = () => {
             <Tabs
               textColor="inherit"
               value={value}
-              onChange={(e, val) => setValue(val)}
             >
               <Tab
                 className={classes.font}
@@ -46,7 +46,7 @@ const Header = () => {
               <Tab
                 className={classes.font}
                 LinkComponent={Link}
-                to="/"
+                to="/Profile"
                 label="My Profile"
               />
               <Tab
@@ -62,22 +62,30 @@ const Header = () => {
           {!isLoggedIn && (
             <>
               <Button
-              onClick={() => dispath(authActions.logout())}
-              LinkComponent={Link}
-              to="/auth"
-              variant="contained"
-              sx={{ margin: 1, borderRadius: 10 }}
-              color="warning"
-            >
-              login or create an account
-            </Button>
+                onClick={() => {
+                  dispath(logout());
+
+                  localStorage.removeItem("userId");
+                }}
+                LinkComponent={Link}
+                to="/Authentication"
+                variant="contained"
+                sx={{ margin: 1, borderRadius: 10 }}
+                color="warning"
+              >
+                login or create an account
+              </Button>
             </>
           )}
           {isLoggedIn && (
             <Button
-              onClick={() => dispath(authActions.logout())}
+              onClick={() => {
+                dispath(logout());
+
+                localStorage.removeItem("userId");
+              }}
               LinkComponent={Link}
-              to="/auth"
+              to="/"
               variant="contained"
               sx={{ margin: 1, borderRadius: 10 }}
               color="warning"

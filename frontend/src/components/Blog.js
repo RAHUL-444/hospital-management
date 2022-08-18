@@ -75,7 +75,7 @@ const Blog = ({
           ":hover": {
             boxShadow: "10px 10px 20px 20px",
           },
-          backgroundColor:"yellow"
+          backgroundColor: "yellow",
         }}
       >
         <CardContent>

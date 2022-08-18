@@ -3,18 +3,27 @@ import React, { useState } from "react";
 import axios from "axios";
 import Header from "./Header";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store";
+import { login } from "../store";
 import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
   const naviagte = useNavigate();
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
+  const [defaultData, setDefaultData] = useState([
+    {
+      name: "",
+      email: "",
+      password: "",
+      isloggedIN: false,
+    },
+  ]);
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
     password: "",
   });
+
   const [isSignup, setIsSignup] = useState(false);
   const handleChange = (e) => {
     setInputs((prevState) => ({
@@ -33,28 +42,39 @@ const Auth = () => {
 
     const data = await res.data;
     console.log("send Request received", data);
+    setDefaultData(data);
     return data;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs);
     if (isSignup) {
       sendRequest("signup")
         .then((data) => localStorage.setItem("userId", data.user._id))
-        .then(() => dispath(authActions.login()))
-        .then(() => naviagte("/"));
+        .then(() => naviagte("/Home"));
     } else {
-      sendRequest()
-        .then((data) => localStorage.setItem("userId", data.user._id))
-        .then(() => dispath(authActions.login()))
-        .then(() => naviagte("/"));
+      sendRequest("login")
+        .then((data) =>
+          localStorage.setItem("userId", JSON.stringify(data.user._id))
+        )
+        .then(() =>
+          dispatch(
+            login({
+              name: inputs.name,
+              email: inputs.email,
+              password: inputs.password,
+              isloggedIN: true,
+            })
+          )
+        )
+        // .then((data) => setDefaultData(data))
+        .then(() => naviagte("/Home"));
     }
   };
   return (
     <>
       <Header />
-      
+
       <form onSubmit={handleSubmit}>
         <Box
           maxWidth={400}

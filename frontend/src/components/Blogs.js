@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Blog from "./Blog";
-
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { login, selectUser } from "../store/index";
 const Blogs = () => {
   const [blogs, setBlogs] = useState();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const sendRequest = async () => {
     const res = await axios
       .get("http://localhost:5000/api/blog")
@@ -12,7 +16,18 @@ const Blogs = () => {
     return data;
   };
   useEffect(() => {
-    sendRequest().then((data) => setBlogs(data.blogs));
+    sendRequest()
+      .then((data) => setBlogs(data.blogs))
+      .then(() =>
+        dispatch(
+          login({
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            isloggedIN: true,
+          })
+        )
+      );
   }, []);
   console.log(blogs);
   return (
