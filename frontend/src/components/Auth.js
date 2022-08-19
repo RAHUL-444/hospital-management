@@ -4,16 +4,24 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../store";
 import { useNavigate } from "react-router-dom";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
 
 const Auth = () => {
   const naviagte = useNavigate();
   const dispatch = useDispatch();
-
+  // const [gender, setGender] = React.useState('');
   const [defaultData, setDefaultData] = useState([
     {
       name: "",
       email: "",
       password: "",
+      birthday: "",
+      gender: "",
+      type: "",
       isloggedIN: false,
     },
   ]);
@@ -21,6 +29,9 @@ const Auth = () => {
     name: "",
     email: "",
     password: "",
+    gender: "",
+    type: "",
+    birthday: "",
   });
 
   const [isSignup, setIsSignup] = useState(false);
@@ -72,13 +83,13 @@ const Auth = () => {
   };
   return (
     <>
-
       <form onSubmit={handleSubmit}>
         <Box
-          maxWidth={400}
+          maxWidth={600}
+          minheight= '100vh'
           display="flex"
           flexDirection={"column"}
-          alignItems="center"
+          alignItems="flexStart"
           justifyContent={"center"}
           boxShadow="10px 10px 20px #ccc"
           padding={3}
@@ -87,47 +98,169 @@ const Auth = () => {
           borderRadius={5}
         >
           <Typography variant="h2" padding={3} textAlign="center">
-            {isSignup ? "Sign Up" : "Login"}
+            <u>{isSignup ? "Sign Up" : "Login"}</u>
           </Typography>
           {isSignup && (
+            <>
+              <InputLabel id="demo-simple-select-label">Name</InputLabel>
+              <TextField
+                name="name"
+                onChange={handleChange}
+                value={inputs.name}
+                // placeholder="Name"
+                margin="normal"
+              />
+            </>
+          )}{" "}
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <div
+              style={{
+                marginRight: "20px",
+              }}
+            >
+              {isSignup && (
+                <>
+                  <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name="gender"
+                    value={inputs.gender}
+                    label="Age"
+                    sx={{ width: 290 }}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={1}>Male</MenuItem>
+                    <MenuItem value={2}>Female</MenuItem>
+                    <MenuItem value={3}>TRANS</MenuItem>
+                  </Select>
+                </>
+              )}
+            </div>
+            <div
+              style={{
+                marginRight: "10px",
+              }}
+            >
+              {isSignup && (
+                <>
+                  <InputLabel id="demo-simple-select-label">
+                    User Type
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name="type"
+                    value={inputs.type}
+                    label="Age"
+                    sx={{ width: 290 }}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={1}>Patient</MenuItem>
+                    <MenuItem value={2}>Doctor</MenuItem>
+                    <MenuItem value={3}>Admin</MenuItem>
+                  </Select>
+                </>
+              )}
+            </div>
+          </div>
+          <>
+            <InputLabel id="demo-simple-select-label">Email</InputLabel>
             <TextField
-              name="name"
+              name="email"
               onChange={handleChange}
-              value={inputs.name}
-              placeholder="Name"
+              value={inputs.email}
+              type={"email"}
+              // placeholder="Email"
               margin="normal"
             />
-          )}{" "}
-          <TextField
-            name="email"
-            onChange={handleChange}
-            value={inputs.email}
-            type={"email"}
-            placeholder="Email"
-            margin="normal"
-          />
-          <TextField
-            name="password"
-            onChange={handleChange}
-            value={inputs.password}
-            type={"password"}
-            placeholder="Password"
-            margin="normal"
-          />{" "}
+          </>
+          
           {isSignup && (
-            <TextField
-              name="password"
-              // onChange={handleChange}
-              value={inputs.confirm_password}
-              type={"password"}
-              placeholder="Confirm Password"
-              margin="normal"
-            />
-          )}{" "}
-          {!isSignup && (
-            <Typography sx={{ color: "blue", fontSize: "15px" }}>
+            <>
+              <InputLabel id="demo-simple-select-label">Birthday</InputLabel>
+              <TextField
+                name="birthday"
+                // label="Birthday"
+                onChange={handleChange}
+                value={inputs.birthday}
+                type="date"
+                defaultValue="2022-08-19"
+                sx={{ width: 290 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </>
+          )}
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <div
+              style={{
+                marginRight: "20px",
+              }}
+            >{!isSignup && (
+              <>
+                <InputLabel id="demo-simple-select-label">Password</InputLabel>
+                <TextField
+                  name="password"
+                  onChange={handleChange}
+                  value={inputs.password}
+                  type={"password"}
+                  sx={{ width: 600 }}
+                  // placeholder="Password"
+                  margin="normal"
+                />
+              </>)}
+              {isSignup && (<>
+                <InputLabel id="demo-simple-select-label">Password</InputLabel>
+                <TextField
+                  name="password"
+                  onChange={handleChange}
+                  value={inputs.password}
+                  type={"password"}
+                  sx={{ width: 290 }}
+                  // placeholder="Password"
+                  margin="normal"
+                />
+              </>)}
+            </div>
+            <div style={{}}>
+              {isSignup && (
+                <>
+                  <InputLabel id="demo-simple-select-label">
+                    Confirm Password
+                  </InputLabel>
+                  <TextField
+                    name="password"
+                    // onChange={handleChange}
+                    value={inputs.confirm_password}
+                    sx={{ width: 290 }}
+                    type={"password"}
+                    // placeholder="Confirm Password"
+                    margin="normal"
+                  />
+                </>
+              )}
+            </div>
+          </div>
+          {!isSignup && (<div  style={{
+              display: "flex",
+              alignItems:"center",
+              justifyContent:"center",
+              marginTop: '25px',
+            }}>
+            <Typography sx={{ color: "blue", fontSize: "15px" , alignItems:"center" }}>
               Forgot Password?
             </Typography>
+            </div>
           )}
           <Button
             type="submit"
@@ -140,6 +273,8 @@ const Auth = () => {
           <Button
             onClick={() => setIsSignup(!isSignup)}
             sx={{ borderRadius: 3, marginTop: 3 }}
+            variant="contained"
+            color="success"
           >
             {isSignup ? "Already have an account, Login" : "Create New Account"}
           </Button>

@@ -64,7 +64,7 @@ const AddBlog = () => {
               variant="h2"
               textAlign={"center"}
             >
-              Create Appointment
+             <u> Create Appointment</u>
             </Typography>
             <InputLabel className={classes.font} sx={labelStyles}>
               Disease

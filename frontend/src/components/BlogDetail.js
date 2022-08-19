@@ -76,7 +76,7 @@ const BlogDetail = () => {
               variant="h2"
               textAlign={"center"}
             >
-              Update Appointment
+              <u>Update Appointment</u>
             </Typography>
             <InputLabel sx={labelStyles}>Title</InputLabel>
             <TextField

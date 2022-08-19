@@ -32,7 +32,7 @@ const Profile = () => {
             variant="h2"
             textAlign={"center"}
           >
-            User Profile
+            <u>User Profile</u>
           </Typography>
           <InputLabel className={classes.font} sx={labelStyles}>
             Name : <>{user.name}</>
