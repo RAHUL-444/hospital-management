@@ -6,18 +6,18 @@ export const getAllBlogs = async (req, res, next) => {
   let blogs;
   try {
     blogs = await Blog.find().populate("user");
+    console.log('blogs',blogs)
   } catch (err) {
     return console.log(err);
   }
   if (!blogs) {
     return res.status(404).json({ message: "No Blogs Found" });
   }
-  return res.status(200).json({ blogs });
+  return res.status(200).json({ blogs:blogs });
 };
 
 export const addBlog = async (req, res, next) => {
-  const { title, description,department, image, user } = req.body;
-  console.log('department',department)
+  const { title, description,department, date,user } = req.body;
   let existingUser;
   try {
     existingUser = await User.findById(user);
@@ -31,7 +31,7 @@ export const addBlog = async (req, res, next) => {
     title,
     description,
     department,
-    image,
+    date,
     user,
   });
   try {
@@ -45,7 +45,6 @@ export const addBlog = async (req, res, next) => {
     console.log(err);
     return res.status(500).json({ message: err });
   }
-
   return res.status(200).json({ blog });
 };
 
@@ -64,7 +63,7 @@ export const updateBlog = async (req, res, next) => {
   if (!blog) {
     return res.status(500).json({ message: "Unable To Update The Blog" });
   }
-  return res.status(200).json({ blog });
+  return res.status(200).json({ blog:blog });
 };
 
 export const getById = async (req, res, next) => {

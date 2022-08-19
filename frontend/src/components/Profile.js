@@ -9,6 +9,30 @@ const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const Profile = () => {
   const classes = useStyles();
   const user = useSelector(selectUser);
+  let userType = "";
+  let userGender = "";
+  if (user.type === 1) {
+    userType= "Patient";
+  } else if (user.type === 2) {
+    userType= "Doctor";
+  } else if (user.type === 3) {
+    userType= "Admin";
+  } else {
+    userType= "NA";
+  }
+
+  if (user.gender === 1) {
+    userGender= "Male";
+  } else if (user.type === 2) {
+    userGender= "Female";
+  } else if (user.type === 3) {
+    userGender= "AdTransmin";
+  } else {
+    userGender= "NA";
+  }
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <div>
@@ -40,6 +64,15 @@ const Profile = () => {
 
           <InputLabel className={classes.font} sx={labelStyles}>
             Email : <>{user.email}</>
+          </InputLabel>
+          <InputLabel className={classes.font} sx={labelStyles}>
+            Birthday : <>{user.birthday}</>
+          </InputLabel>
+          <InputLabel className={classes.font} sx={labelStyles}>
+            Gender : <>{userGender}</>
+          </InputLabel>
+          <InputLabel className={classes.font} sx={labelStyles}>
+            User Type : <>{userType}</>
           </InputLabel>
         </Box>
       </div>

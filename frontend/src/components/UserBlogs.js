@@ -20,7 +20,7 @@ const UserBlogs = () => {
   useEffect(() => {
     sendRequest().then((data) => setUser(data.user));
   }, []);
-  console.log(user);
+  console.log(user)
   return (
     <div
       style={{
@@ -46,6 +46,7 @@ const UserBlogs = () => {
           display: "flex",
           marginTop: "10px",
           justifyContent: "center",
+          flexWrap: 'wrap',
         }}
       >
         {user &&
@@ -59,6 +60,7 @@ const UserBlogs = () => {
               description={blog.description}
               userName={user.name}
               email={user.email}
+              date={blog.date}
               department={blog.department}
             />
           ))}

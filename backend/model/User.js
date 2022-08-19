@@ -12,13 +12,18 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  birthday: {
+    type: String,
+  },
+  type: {
+    type: Number,
+  },
+  gender: {
+    type: Number,
+  },
   password: {
     type: String,
     minlength: 6,
-  },
-  hashpassword: {
-    type: String,
-    minlength: 3,
   },
   blogs: [{ type: mongoose.Types.ObjectId, ref: "Blog", required: true }],
 });

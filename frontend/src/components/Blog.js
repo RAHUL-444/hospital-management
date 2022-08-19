@@ -18,31 +18,31 @@ import { useStyles } from "./utils";
 import { blueGrey } from "@mui/material/colors";
 const Blog = ({
   title,
-  description,
-  imageURL,
-  userName,
-  isUser,
+  description,  
+  userName,  
   id,
+  date,
   department,
   email,
 }) => {
+  console.log(date);
   const classes = useStyles();
   const navigate = useNavigate();
-  const handleEdit = () => {
-    navigate(`/myBlogs/${id}`);
-  };
-  const deleteRequest = async () => {
-    const res = await axios
-      .delete(`http://localhost:5000/api/blog/${id}`)
-      .catch((err) => console.log(err));
-    const data = await res.data;
-    return data;
-  };
-  const handleDelete = () => {
-    deleteRequest()
-      .then(() => navigate("/"))
-      .then(() => navigate("/blogs"));
-  };
+  // const handleEdit = () => {
+  //   navigate(`/myBlogs/${id}`);
+  // };
+  // const deleteRequest = async () => {
+  //   const res = await axios
+  //     .delete(`http://localhost:5000/api/blog/${id}`)
+  //     .catch((err) => console.log(err));
+  //   const data = await res.data;
+  //   return data;
+  // };
+  // const handleDelete = () => {
+  //   deleteRequest()
+  //     .then(() => navigate("/"))
+  //     .then(() => navigate("/blogs"));
+  // };
   let departmentName = "";
   if (department === "10") {
     departmentName = "Cardiology";
@@ -91,6 +91,8 @@ const Blog = ({
             <b> Description: </b> {description}
             <br />
             <b> Department: </b> {departmentName}
+            <br />
+            <b> Appintment Date: </b> {date}
           </Typography>
         </CardContent>
       </Card>

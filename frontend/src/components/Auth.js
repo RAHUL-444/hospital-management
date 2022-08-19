@@ -1,36 +1,26 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { login } from "../store";
 import { useNavigate } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../store/index";
+import { login } from "../store/index";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 
 const Auth = () => {
   const naviagte = useNavigate();
   const dispatch = useDispatch();
-  // const [gender, setGender] = React.useState('');
-  const [defaultData, setDefaultData] = useState([
-    {
-      name: "",
-      email: "",
-      password: "",
-      birthday: "",
-      gender: "",
-      type: "",
-      isloggedIN: false,
-    },
-  ]);
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
     password: "",
     gender: "",
     type: "",
+    id: "",
     birthday: "",
   });
 
@@ -47,46 +37,62 @@ const Auth = () => {
         name: inputs.name,
         email: inputs.email,
         password: inputs.password,
+        gender: inputs.gender,
+        birthday: inputs.birthday,
+        type: inputs.type,
+        id: inputs.id,
       })
       .catch((err) => console.log(err));
-
-    const data = await res.data;
-    console.log("send Request received", data);
-    setDefaultData(data);
+    const data = await JSON.stringify(res.data);  
     return data;
+    
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignup) {
       sendRequest("signup")
-        .then((data) => localStorage.setItem("userId", data.user._id))
-        .then(() => naviagte("/Home"));
-    } else {
-      sendRequest("login")
-        .then((data) =>
-          localStorage.setItem("userId", JSON.stringify(data.user._id))
-        )
         .then(() =>
           dispatch(
             login({
               name: inputs.name,
               email: inputs.email,
               password: inputs.password,
+              gender: inputs.gender,
+              birthday: inputs.birthday,
+              type: inputs.type,
+              id: inputs.id,
               isloggedIN: true,
             })
           )
         )
-        // .then((data) => setDefaultData(data))
+        .then(() => naviagte("/Home"));
+    } else {
+      sendRequest("login")
+        .then(() =>
+          dispatch(
+            login({
+              name: inputs.name,
+              email: inputs.email,
+              password: inputs.password,
+              gender: inputs.gender,
+              birthday: inputs.birthday,
+              type: inputs.type,
+              id: inputs.id,
+              isloggedIN: true,
+            })
+          )
+        )
         .then(() => naviagte("/Home"));
     }
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <Box
           maxWidth={600}
-          minheight= '100vh'
+          minheight="100vh"
           display="flex"
           flexDirection={"column"}
           alignItems="flexStart"
@@ -111,7 +117,25 @@ const Auth = () => {
                 margin="normal"
               />
             </>
-          )}{" "}
+          )}
+          {!isSignup && (
+            <>
+              <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                name="type"
+                value={inputs.type}
+                label="Age"
+                sx={{ width: 600 }}
+                onChange={handleChange}
+              >
+                <MenuItem value={1}>Patient</MenuItem>
+                <MenuItem value={2}>Doctor</MenuItem>
+                <MenuItem value={3}>Admin</MenuItem>
+              </Select>
+            </>
+          )}
           <div
             style={{
               display: "flex",
@@ -179,7 +203,7 @@ const Auth = () => {
               margin="normal"
             />
           </>
-          
+
           {isSignup && (
             <>
               <InputLabel id="demo-simple-select-label">Birthday</InputLabel>
@@ -190,7 +214,7 @@ const Auth = () => {
                 value={inputs.birthday}
                 type="date"
                 defaultValue="2022-08-19"
-                sx={{ width: 290 }}
+                sx={{ width: 600 }}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -200,39 +224,48 @@ const Auth = () => {
           <div
             style={{
               display: "flex",
+              marginTop: "20px",
             }}
           >
             <div
               style={{
                 marginRight: "20px",
               }}
-            >{!isSignup && (
-              <>
-                <InputLabel id="demo-simple-select-label">Password</InputLabel>
-                <TextField
-                  name="password"
-                  onChange={handleChange}
-                  value={inputs.password}
-                  type={"password"}
-                  sx={{ width: 600 }}
-                  // placeholder="Password"
-                  margin="normal"
-                />
-              </>)}
-              {isSignup && (<>
-                <InputLabel id="demo-simple-select-label">Password</InputLabel>
-                <TextField
-                  name="password"
-                  onChange={handleChange}
-                  value={inputs.password}
-                  type={"password"}
-                  sx={{ width: 290 }}
-                  // placeholder="Password"
-                  margin="normal"
-                />
-              </>)}
+            >
+              {!isSignup && (
+                <>
+                  <InputLabel id="demo-simple-select-label">
+                    Password
+                  </InputLabel>
+                  <TextField
+                    name="password"
+                    onChange={handleChange}
+                    value={inputs.password}
+                    type={"password"}
+                    sx={{ width: 600 }}
+                    // placeholder="Password"
+                    margin="normal"
+                  />
+                </>
+              )}
+              {isSignup && (
+                <>
+                  <InputLabel id="demo-simple-select-label">
+                    Password
+                  </InputLabel>
+                  <TextField
+                    name="password"
+                    onChange={handleChange}
+                    value={inputs.password}
+                    type={"password"}
+                    sx={{ width: 290 }}
+                    // placeholder="Password"
+                    margin="normal"
+                  />
+                </>
+              )}
             </div>
-            <div style={{}}>
+            <div>
               {isSignup && (
                 <>
                   <InputLabel id="demo-simple-select-label">
@@ -251,15 +284,20 @@ const Auth = () => {
               )}
             </div>
           </div>
-          {!isSignup && (<div  style={{
-              display: "flex",
-              alignItems:"center",
-              justifyContent:"center",
-              marginTop: '25px',
-            }}>
-            <Typography sx={{ color: "blue", fontSize: "15px" , alignItems:"center" }}>
-              Forgot Password?
-            </Typography>
+          {!isSignup && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "25px",
+              }}
+            >
+              <Typography
+                sx={{ color: "blue", fontSize: "15px", alignItems: "center" }}
+              >
+                Forgot Password?
+              </Typography>
             </div>
           )}
           <Button

@@ -15,7 +15,7 @@ export const getAllUser = async (req, res, next) => {
 };
 
 export const signup = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, gender, birthday, type, id } = req.body;
   let existingUser;
   try {
     existingUser = await User.findOne({ email });
@@ -32,8 +32,11 @@ export const signup = async (req, res, next) => {
   const user = new User({
     name,
     email,
-    password,
-    hashpassword: hashedPassword,
+    password: hashedPassword,
+    gender,
+    birthday,
+    type,
+    id,
     blogs: [],
   });
 
@@ -46,22 +49,32 @@ export const signup = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { name, email, password, gender, birthday, type, id } = req.body;
   let existingUser;
+  let existingUserType = false;
   try {
     existingUser = await User.findOne({ email });
+    if ((await existingUser.type) == type) {
+      existingUserType = true;
+    }
   } catch (err) {
     return console.log(err);
   }
   if (!existingUser) {
-    return res.status(404).json({ message: "Couldnt Find User By This Email" });
+    return res
+      .status(404)
+      .json({ message: "Couldnt Find User By This Email & type" });
   }
-
   const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
   if (!isPasswordCorrect) {
     return res.status(400).json({ message: "Incorrect Password" });
   }
-  return res
-    .status(200)
-    .json({ message: "Login Successfull", user: existingUser });
+  if (existingUserType == false) {
+    return res.status(400).json({ message: "Incorrect User Type Selected" });
+  }
+  if (existingUserType == true && isPasswordCorrect && existingUser) {
+    return res
+      .status(200)
+      .json({ message: "Login Successfull", user: existingUser });
+  }
 };

@@ -6,15 +6,18 @@ import { useStyles } from "./utils";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useDispatch, useSelector } from "react-redux";
 
 const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const AddBlog = () => {
   const classes = useStyles();
+  const user = useSelector(state=>state.user);
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     title: "",
     description: "",
     department: "",
+    date:"",
   });
   const handleChange = (e) => {
     setInputs((prevState) => ({
@@ -28,7 +31,8 @@ const AddBlog = () => {
         title: inputs.title,
         description: inputs.description,
         department: inputs.department,
-        user: localStorage.getItem("userId"),
+        date: inputs.date,
+        user:user.user.id,
       })
       .catch((err) => console.log(err));
     const data = await res.data;
@@ -38,7 +42,7 @@ const AddBlog = () => {
     e.preventDefault();
     sendRequest()
     //   .then((data) => console.log(data))
-      .then(() => navigate("/Appointments"));
+      .then(() => navigate("/Home"));
   };
   return (
     <>
@@ -88,6 +92,21 @@ const AddBlog = () => {
               margin="auto"
               variant="outlined"
             />
+            <InputLabel className={classes.font} sx={labelStyles}>
+              Appointment Date
+            </InputLabel>
+            <TextField
+                name="date"
+                // label="date"
+                onChange={handleChange}
+                value={inputs.date}
+                type="date"
+                defaultValue="2022-08-19"
+                // sx={{ width: 600 }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
             <InputLabel className={classes.font} sx={labelStyles}>
               Department
             </InputLabel>

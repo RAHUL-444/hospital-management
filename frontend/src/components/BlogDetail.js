@@ -9,7 +9,6 @@ const BlogDetail = () => {
   const navigate = useNavigate();
   const [blog, setBlog] = useState();
   const id = useParams().id;
-  console.log(id);
   const [inputs, setInputs] = useState({});
   const handleChange = (e) => {
     setInputs((prevState) => ({
@@ -44,10 +43,8 @@ const BlogDetail = () => {
     const data = await res.data;
     return data;
   };
-  console.log(blog);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs);
     sendRequest()
       .then((data) => console.log(data))
       .then(() => navigate("/myBlogs/"));

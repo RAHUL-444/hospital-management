@@ -8,28 +8,6 @@ const Blogs = () => {
   const [blogs, setBlogs] = useState();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const sendRequest = async () => {
-    const res = await axios
-      .get("http://localhost:5000/api/blog")
-      .catch((err) => console.log(err));
-    const data = await res.data;
-    return data;
-  };
-  useEffect(() => {
-    sendRequest()
-      .then((data) => setBlogs(data.blogs))
-      .then(() =>
-        dispatch(
-          login({
-            name: user.name,
-            email: user.email,
-            password: user.password,
-            isloggedIN: true,
-          })
-        )
-      );
-  }, []);
-  console.log(blogs);
   return (
     <div>
       {blogs &&
@@ -39,7 +17,7 @@ const Blogs = () => {
             isUser={localStorage.getItem("userId") === blog.user._id}
             title={blog.title}
             description={blog.description}
-            imageURL={blog.image}
+            date={blog.date}
             userName={blog.user.name}
             email={blog.email}
           />

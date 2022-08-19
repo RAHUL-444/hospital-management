@@ -1,50 +1,48 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import { selectUser } from "../store/index";
 
-import { useDispatch } from "react-redux";
-import { login } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
+import { login } from "../store/index";
 const Home = () => {
+  const user = useSelector(selectUser);  
   const dispath = useDispatch();
-  const user = useSelector(selectUser);
-  console.log(user);
-  const [defaultData, setDefaultData] = useState([
-    {
-      name: "",
-      email: "",
-      password: "",
-      isloggedIN: false,
-      blogs: [],
-      _id: "",
-    },
-  ]);
   useEffect(() => {
     async function getUser() {
-      console.log("USER Profile", user);
       const response = await axios.post(
         `http://localhost:5000/api/user/login`,
         {
-          name: user.name,
           email: user.email,
           password: user.password,
         }
       );
-      console.log("response.data", response.data);
+      getUser();
+      console.log('response',response);
       dispath(
         login({
           name: response.data.user.name,
           email: response.data.user.email,
           password: response.data.user.password,
+          birthday: response.data.user.birthday,
+          gender: response.data.user.gender,
+          type: response.data.user.type,
           id: response.data.user._id,
           blogs: response.data.user.blogs,
         })
       );
-      setDefaultData(response.data);
     }
     getUser();
-    console.log("defaultData", defaultData);
-  }, [dispath, user, defaultData, user.email, user.name, user.password]);
+  }, [
+    dispath,
+    user,
+    user.email,
+    user.name,
+    user.password,
+    user.gender,
+    user.blogs,
+    user.type,
+  ]);
   return (
     <>
       <div
@@ -58,6 +56,39 @@ const Home = () => {
           backgroundSize: "cover",
         }}
       >
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            zIndex: "50",
+            height: "100vh",
+            fontWeight: "800",
+            fontSize: "2.125rem",
+            lineHeight: "1.235",
+            letterSpacing: "0.00735em",
+            color: "black",
+          }}
+        >
+          <div
+            style={{
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "center",
+              zIndex: "50",
+              height: "100vh",
+              fontWeight: "800",
+              fontSize: "2.125rem",
+              lineHeight: "1.235",
+              letterSpacing: "0.00735em",
+              color: "black",
+            }}
+          >
+            <div>
+              Hi! "{user.name}" &nbsp; to &nbsp; HOSPITAL MANAGEMENT SYSTEM
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

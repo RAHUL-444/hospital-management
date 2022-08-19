@@ -40,9 +40,16 @@ const Header = () => {
               <Tab
                 className={classes.font}
                 LinkComponent={Link}
+                to="/Home"
+                label="Home"
+              />
+              <Tab
+                className={classes.font}
+                LinkComponent={Link}
                 to="/Appointments"
                 label="All Appointments"
               />
+              
               <Tab
                 className={classes.font}
                 LinkComponent={Link}
@@ -59,25 +66,7 @@ const Header = () => {
           </Box>
         )}
         <Box display="flex" marginLeft="auto">
-          {!isLoggedIn && (
-            <>
-              <Button
-                onClick={() => {
-                  dispath(logout());
-
-                  localStorage.removeItem("userId");
-                }}
-                LinkComponent={Link}
-                to="/Authentication"
-                variant="contained"
-                sx={{ margin: 1, borderRadius: 10 }}
-                color="warning"
-              >
-                login or create an account
-              </Button>
-            </>
-          )}
-          {isLoggedIn && (
+         {isLoggedIn && (
             <Button
               onClick={() => {
                 dispath(logout());
