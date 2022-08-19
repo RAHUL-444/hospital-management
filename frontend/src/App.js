@@ -5,6 +5,7 @@ import BlogDetail from "./components/BlogDetail";
 import AddBlog from "./components/AddBlog";
 import Profile from "./components/Profile";
 import Header from "./components/Header";
+import PageNotFound from "./components/PageNotFound";
 import React, {useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Auth from "./components/Auth";
@@ -74,6 +75,7 @@ function App() {
           element={<Auth />}
         />{" "}
         <Route path={`${process.env.PUBLIC_URL + "/"}`} element={<Auth />} />
+        <Route path={`${process.env.PUBLIC_URL + "*"}`} element={<PageNotFound />} />
       </Routes>
     </>
   );
