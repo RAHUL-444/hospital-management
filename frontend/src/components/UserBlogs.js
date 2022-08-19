@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Blog from "./Blog";
-import Header from "./Header";
 import { useStyles } from "./utils";
 import { useSelector } from "react-redux";
 import {  selectUser } from "../store/index";
@@ -32,7 +31,6 @@ const UserBlogs = () => {
         backgroundSize: "cover",
       }}
     >
-      <Header />
       <Typography
         className={classes.font}
         fontWeight={"bold"}

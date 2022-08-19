@@ -4,7 +4,7 @@ import UserBlogs from "./components/UserBlogs";
 import BlogDetail from "./components/BlogDetail";
 import AddBlog from "./components/AddBlog";
 import Profile from "./components/Profile";
-
+import Header from "./components/Header";
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Auth from "./components/Auth";
@@ -21,6 +21,7 @@ function App() {
   }, [dispatch]);
   return (
     <>
+    <Header/>
       <Routes>
         <Route path={`${process.env.PUBLIC_URL + "/"}`} element={<Auth />} />
         <Route path={`${process.env.PUBLIC_URL + "/Home"}`} element={<Home />} />

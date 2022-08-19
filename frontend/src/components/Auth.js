@@ -1,7 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
-import Header from "./Header";
 import { useDispatch } from "react-redux";
 import { login } from "../store";
 import { useNavigate } from "react-router-dom";
@@ -73,7 +72,6 @@ const Auth = () => {
   };
   return (
     <>
-      <Header />
 
       <form onSubmit={handleSubmit}>
         <Box

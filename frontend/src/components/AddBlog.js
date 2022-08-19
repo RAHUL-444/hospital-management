@@ -3,7 +3,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStyles } from "./utils";
-import Header from "./Header";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -43,7 +42,6 @@ const AddBlog = () => {
   };
   return (
     <>
-      <Header />
       <div>
         <form onSubmit={handleSubmit}>
           <Box

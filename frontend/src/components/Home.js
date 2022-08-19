@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import Header from "./Header";
 import { selectUser } from "../store/index";
 
 import { useDispatch } from "react-redux";
@@ -59,7 +58,6 @@ const Home = () => {
           backgroundSize: "cover",
         }}
       >
-        <Header />
       </div>
     </>
   );

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Header from "./Header";
 import { selectUser } from "../store/index";
 import { Box, InputLabel, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +11,6 @@ const Profile = () => {
   const user = useSelector(selectUser);
   return (
     <>
-      <Header />
       <div>
         <Box
           border={3}
