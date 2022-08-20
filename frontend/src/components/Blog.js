@@ -25,7 +25,6 @@ const Blog = ({
   department,
   email,
 }) => {
-  console.log(date);
   const classes = useStyles();
   const navigate = useNavigate();
   // const handleEdit = () => {

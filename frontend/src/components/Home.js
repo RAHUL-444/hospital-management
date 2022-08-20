@@ -18,7 +18,6 @@ const Home = () => {
         }
       );
       getUser();
-      console.log('response',response);
       dispath(
         login({
           name: response.data.user.name,

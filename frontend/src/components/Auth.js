@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-
+import ToastN from "../feature/ToastN";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../store/index";
 import { login } from "../store/index";
@@ -42,10 +42,36 @@ const Auth = () => {
         type: inputs.type,
         id: inputs.id,
       })
-      .catch((err) => console.log(err));
-    const data = await JSON.stringify(res.data);  
+      .then((res) => {
+        if (res.status === 200) {
+          ToastN(res.data.message, "success");
+        }
+      })
+      .then(() =>
+        dispatch(
+          login({
+            name: inputs.name,
+            email: inputs.email,
+            password: inputs.password,
+            gender: inputs.gender,
+            birthday: inputs.birthday,
+            type: inputs.type,
+            id: inputs.id,
+            isloggedIN: true,
+          })
+        )
+      )
+      .then(() => naviagte("/Home"))
+      .catch((err) => console.log('ERRRROORRR',err))
+      .then((res) => {
+        console.log('then')
+        if (res.status === 400) {
+          console.log('ERRRROORRR 400')
+          ToastN(res.data.message, "warning");
+        }
+      });
+    const data = await JSON.stringify(res.data);
     return data;
-    
   };
 
   const handleSubmit = (e) => {
@@ -68,22 +94,7 @@ const Auth = () => {
         )
         .then(() => naviagte("/Home"));
     } else {
-      sendRequest("login")
-        .then(() =>
-          dispatch(
-            login({
-              name: inputs.name,
-              email: inputs.email,
-              password: inputs.password,
-              gender: inputs.gender,
-              birthday: inputs.birthday,
-              type: inputs.type,
-              id: inputs.id,
-              isloggedIN: true,
-            })
-          )
-        )
-        .then(() => naviagte("/Home"));
+      sendRequest("login");
     }
   };
 

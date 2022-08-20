@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useDispatch, useSelector } from "react-redux";
+import ToastN from "../feature/ToastN";
 
 const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const AddBlog = () => {
@@ -33,6 +34,11 @@ const AddBlog = () => {
         department: inputs.department,
         date: inputs.date,
         user:user.user.id,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          ToastN(res.data.message, "success");
+        }
       })
       .catch((err) => console.log(err));
     const data = await res.data;
@@ -64,6 +70,7 @@ const AddBlog = () => {
               className={classes.font}
               fontWeight={"bold"}
               padding={3}
+              required={true}
               color="grey"
               variant="h2"
               textAlign={"center"}
@@ -78,6 +85,7 @@ const AddBlog = () => {
               name="title"
               onChange={handleChange}
               value={inputs.title}
+              required={true}
               margin="auto"
               variant="outlined"
             />
@@ -88,6 +96,7 @@ const AddBlog = () => {
               className={classes.font}
               name="description"
               onChange={handleChange}
+              required={true}
               value={inputs.description}
               margin="auto"
               variant="outlined"
@@ -100,6 +109,7 @@ const AddBlog = () => {
                 // label="date"
                 onChange={handleChange}
                 value={inputs.date}
+                required={true}
                 type="date"
                 defaultValue="2022-08-19"
                 // sx={{ width: 600 }}
@@ -117,6 +127,7 @@ const AddBlog = () => {
                   name="department"
                   value={inputs.department}
                   label="Department"
+                  required={true}
                   onChange={handleChange}
                   margin="auto"
                   variant="outlined"
