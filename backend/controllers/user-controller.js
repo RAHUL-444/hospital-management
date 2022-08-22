@@ -15,7 +15,7 @@ export const getAllUser = async (req, res, next) => {
 };
 
 export const signup = async (req, res, next) => {
-  const { name, email, password, gender, birthday, type, id } = req.body;
+  const { name, email, password, gender, birthday, type='5', id } = req.body;
   let existingUser;
   try {
     existingUser = await User.findOne({ email });
@@ -25,7 +25,7 @@ export const signup = async (req, res, next) => {
   if (existingUser) {
     return res
       .status(400)
-      .json({ message: "User Already Exists! Login Instead" });
+      .json({status:401, message: "User Already Exists! Login Instead" });
   }
   const hashedPassword = bcrypt.hashSync(password);
 
@@ -45,16 +45,16 @@ export const signup = async (req, res, next) => {
   } catch (err) {
     return console.log(err);
   }
-  return res.status(201).json({ user });
+  return res.status(201).json({ user,status:200});
 };
 
 export const login = async (req, res, next) => {
-  const { name, email, password, gender, birthday, type, id } = req.body;
+  const { name, email, password, gender, birthday, type='5', id } = req.body;
   let existingUser;
   let existingUserType = false;
   try {
     existingUser = await User.findOne({ email });
-    if ((await existingUser.type) == type) {
+    if (existingUser.type === type) {
       existingUserType = true;
     }
   } catch (err) {
@@ -63,18 +63,18 @@ export const login = async (req, res, next) => {
   if (!existingUser) {
     return res
       .status(404)
-      .json({ message: "Couldnt Find User By This Email & type" });
+      .json({ status:404,message: "Couldnt Find User By This Email & type" });
   }
   const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
   if (!isPasswordCorrect) {
-    return res.status(400).json({ message: "Incorrect Password" });
+    return res.status(400).json({status:402, message: "Incorrect Password" });
   }
   if (existingUserType == false) {
-    return res.status(400).json({ message: "Incorrect User Type Selected" });
+    return res.status(400).json({status:405, message: "Incorrect User Type Selected" });
   }
   if (existingUserType == true && isPasswordCorrect && existingUser) {
     return res
       .status(200)
-      .json({ message: "Login Successfull", user: existingUser });
+      .json({status:200, message: "Login Successfull", user: existingUser });
   }
 };

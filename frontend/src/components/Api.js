@@ -14,7 +14,14 @@ export const sendRequest = async (type, values) => {
     })
     .catch((err) => {
       console.log(err);
-      ToastN("Something Went Wrong. Try Again", "warning");
+      console.log(err.response.data.status);
+      if (err.response.data.status === 401) {
+        ToastN(err.response.data.message, "warning");
+      } else if (err.response.data.status === 402) {
+        ToastN(err.response.data.message, "warning");
+      } else {
+        ToastN("Something Went Wrong. Try Again", "warning");
+      }
     });
 
   const data = await res.data;

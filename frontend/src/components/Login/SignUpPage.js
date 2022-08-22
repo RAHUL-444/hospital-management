@@ -22,7 +22,14 @@ const schema = Yup.object().shape({
   gender: Yup.string()
     .required("Gender is a required field"),
   birthday: Yup.string()
-    .required("Birthday is a required field")
+    .required("Birthday is a required field"),
+    changepassword: Yup.string().when("password", {
+      is: val => (val && val.length > 0 ? true : false),
+      then: Yup.string().oneOf(
+        [Yup.ref("password")],
+        "Both password need to be the same"
+      )
+    })
 });
 
 function SignUpPage() {
@@ -41,6 +48,7 @@ function SignUpPage() {
           type: "",
           id: "",
           birthday: "",
+          changepassword: ""
         }}
         onSubmit={(values) => {
           sendRequest("signup", values).then((res) => {
@@ -165,6 +173,18 @@ function SignUpPage() {
                 />
                 <p className="error">
                   {errors.password && touched.password && errors.password}
+                </p>
+                <div className="form-user-type">Confirm Password</div>
+                <input
+                  type="password"
+                  name="changepassword"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.changepassword}
+                  className="form-control"
+                />
+                <p className="error">
+                {errors.changepassword}
                 </p>
                 <button type="submit" variant="contained" color="success">
                   Sign Up
