@@ -8,7 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { login } from "../../store/index";
 import { useDispatch } from "react-redux";
-import { Button} from "@mui/material";
+import { Button } from "@mui/material";
 
 const schema = Yup.object().shape({
   type: Yup.string().required("User Type is a required field"),
@@ -20,7 +20,7 @@ const schema = Yup.object().shape({
     .min(8, "Password must be at least 8 characters"),
 });
 
-function LoginPage() {
+const LoginPage = (props) => {
   const naviagte = useNavigate();
 
   const dispatch = useDispatch();
@@ -69,7 +69,9 @@ function LoginPage() {
           <div className="login">
             <div className="form">
               <form noValidate onSubmit={handleSubmit}>
-                <span><u>Login</u></span>
+                <span>
+                  <u>Login</u>
+                </span>
                 <div>
                   <div className="form-user-type">User Type</div>
                   <Select
@@ -114,9 +116,9 @@ function LoginPage() {
                 <p className="error">
                   {errors.password && touched.password && errors.password}
                 </p>
-                <button type="submit"
-                  variant="contained"
-                  color="success">Login</button>
+                <button type="submit" variant="contained" color="success">
+                  Login
+                </button>
                 <Button
                   onClick={() => naviagte("/SignUp-Page")}
                   sx={{ borderRadius: 3, marginTop: 3 }}
@@ -132,6 +134,6 @@ function LoginPage() {
       </Formik>
     </>
   );
-}
+};
 
 export default LoginPage;

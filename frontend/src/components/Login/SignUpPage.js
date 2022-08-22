@@ -7,7 +7,7 @@ import ToastN from "../../feature/ToastN";
 import MenuItem from "@mui/material/MenuItem";
 import { login } from "../../store/index";
 import { useDispatch } from "react-redux";
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
 import Select from "@mui/material/Select";
 
 const schema = Yup.object().shape({
@@ -18,20 +18,18 @@ const schema = Yup.object().shape({
   password: Yup.string()
     .required("Password is a required field")
     .min(6, "Password must be at least 8 characters"),
-  gender: Yup.string()
-    .required("Gender is a required field"),
-  date: Yup.string()
-    .required("date is a required field"),
-    changepassword: Yup.string().when("password", {
-      is: val => (val && val.length > 0 ? true : false),
-      then: Yup.string().oneOf(
-        [Yup.ref("password")],
-        "Both password need to be the same"
-      )
-    })
+  gender: Yup.string().required("Gender is a required field"),
+  date: Yup.string().required("date is a required field"),
+  changepassword: Yup.string().when("password", {
+    is: (val) => (val && val.length > 0 ? true : false),
+    then: Yup.string().oneOf(
+      [Yup.ref("password")],
+      "Both password need to be the same"
+    ),
+  }),
 });
 
-function SignUpPage() {
+const SignUpPage = (props) => {
   const naviagte = useNavigate();
 
   const dispatch = useDispatch();
@@ -47,7 +45,7 @@ function SignUpPage() {
           type: "",
           id: "",
           date: "",
-          changepassword: ""
+          changepassword: "",
         }}
         onSubmit={(values) => {
           sendRequest("signup", values).then((res) => {
@@ -81,7 +79,9 @@ function SignUpPage() {
           <div className="login">
             <div className="form">
               <form noValidate onSubmit={handleSubmit}>
-                <span><u>Sign Up</u></span>
+                <span>
+                  <u>Sign Up</u>
+                </span>
                 <div className="form-user-type">Name</div>
                 <input
                   type="name"
@@ -124,22 +124,21 @@ function SignUpPage() {
                 <p className="error">
                   {errors.gender && touched.gender && errors.gender}
                 </p>
-                
-                  <div className="form-user-type">User Type</div>
-                  <Select
-                    name="type"
-                    type="type"
-                    value={values.type}
-                    label="Age"
-                    id="type"
-                    sx={{ width: 360 }}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={1}>Patient</MenuItem>
-                    <MenuItem value={2}>Doctor</MenuItem>
-                    <MenuItem value={3}>Admin</MenuItem>
-                  </Select>
-                
+
+                <div className="form-user-type">User Type</div>
+                <Select
+                  name="type"
+                  type="type"
+                  value={values.type}
+                  id="type"
+                  sx={{ width: 360 }}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={1}>Patient</MenuItem>
+                  <MenuItem value={2}>Doctor</MenuItem>
+                  <MenuItem value={3}>Admin</MenuItem>
+                </Select>
+
                 <p className="error">
                   {errors.type && touched.type && errors.type}
                 </p>
@@ -152,7 +151,7 @@ function SignUpPage() {
                   value={values.date}
                   id="date"
                   defaultValue="2022-08-19"
-                    sx={{ width: 360 }}
+                  sx={{ width: 360 }}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -182,9 +181,7 @@ function SignUpPage() {
                   value={values.changepassword}
                   className="form-control"
                 />
-                <p className="error">
-                {errors.changepassword}
-                </p>
+                <p className="error">{errors.changepassword}</p>
                 <button type="submit" variant="contained" color="success">
                   Sign Up
                 </button>
@@ -203,6 +200,6 @@ function SignUpPage() {
       </Formik>
     </>
   );
-}
+};
 
 export default SignUpPage;
