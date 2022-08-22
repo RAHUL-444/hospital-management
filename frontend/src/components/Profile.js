@@ -11,41 +11,47 @@ const Profile = () => {
   let userType = "";
   let userGender = "";
   if (user.type === 1) {
-    userType= "Patient";
+    userType = "Patient";
   } else if (user.type === 2) {
-    userType= "Doctor";
+    userType = "Doctor";
   } else if (user.type === 3) {
-    userType= "Admin";
+    userType = "Admin";
   } else {
-    userType= "NA";
+    userType = "NA";
   }
 
   if (user.gender === 1) {
-    userGender= "Male";
+    userGender = "Male";
   } else if (user.type === 2) {
-    userGender= "Female";
+    userGender = "Female";
   } else if (user.type === 3) {
-    userGender= "AdTransmin";
+    userGender = "AdTransmin";
   } else {
-    userGender= "NA";
+    userGender = "NA";
   }
 
   useEffect(() => {}, []);
 
   return (
     <>
-      <div>
+      <div
+        style={{
+          position: "relative",
+          zIndex: "1",
+          background: "#FFFFFF",
+          borderRadius: "10px",
+          maxWidth: "360px",
+          margin: "0 auto ",
+          padding: "45px",
+          textAlign: "center",
+          marginTop: "25px",
+          border: "3px",
+          borderColor:
+            "linear-gradient(90deg, rgba(58,75,180,1) 2%, rgba(116,49,110,1) 36%, rgba(2,0,161,1) 73%, rgba(69,92,252,1) 100%)",
+          boxShadow: "10px 10px 20px #ccc",
+        }}
+      >
         <Box
-          border={3}
-          borderColor="linear-gradient(90deg, rgba(58,75,180,1) 2%, rgba(116,49,110,1) 36%, rgba(2,0,161,1) 73%, rgba(69,92,252,1) 100%)"
-          borderRadius={10}
-          boxShadow="10px 10px 20px #ccc"
-          padding={3}
-          margin={"auto"}
-          marginTop={3}
-          display="flex"
-          flexDirection={"column"}
-          width={"50%"}
         >
           <Typography
             className={classes.font}

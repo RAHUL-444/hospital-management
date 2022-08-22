@@ -3,7 +3,6 @@ import { Box, Typography,Button } from "@mui/material";
 
 import { Link } from "react-router-dom";
 import { useStyles } from "./utils";
-const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const PageNotFound = () => {
   const classes = useStyles();
   return (

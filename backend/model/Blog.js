@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-  title: {
+  disease: {
     type: String,
     required: true,
   },

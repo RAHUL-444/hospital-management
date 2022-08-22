@@ -1,25 +1,25 @@
 import "./AddAppointment.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { sendRequest } from "../../api/Api";
+import { sendAddingAppointmentRequest } from "../../api/Api";
 import { useNavigate } from "react-router-dom";
 import ToastN from "../../feature/ToastN";
 import MenuItem from "@mui/material/MenuItem";
-import { login } from "../../store/index";
-import { useDispatch } from "react-redux";
-import {Button} from "@mui/material";
+import { allAppointment } from "../../store/index";
+import { useDispatch,useSelector } from "react-redux";
+import { Button } from "@mui/material";
 import Select from "@mui/material/Select";
 
 const schema = Yup.object().shape({
   disease: Yup.string().required("User Disease is a required field"),
   description: Yup.string().required("User Description is a required field"),
   department: Yup.string().required("User Department is a required field"),
-  date: Yup.string().required("Appointment Date is a required field")    
+  date: Yup.string().required("Appointment Date is a required field"),
 });
 
-const AddAppointment=(props)=> {
+const AddAppointment = (props) => {
   const naviagte = useNavigate();
-
+  const user = useSelector(state=>state.user);
   const dispatch = useDispatch();
   return (
     <>
@@ -34,13 +34,13 @@ const AddAppointment=(props)=> {
           date: "",
         }}
         onSubmit={(values) => {
-          sendRequest("signup", values).then((res) => {
+          sendAddingAppointmentRequest(values,user.user.id).then((res) => {
             if (res.status === 200) {
-              ToastN("Sign up Successfull", "success");
+              ToastN("Appointment Created Successfully", "success");
               dispatch(
-                login({
+                allAppointment({
                   disease: res.user.disease,
-                  description: res.user.description,                 
+                  description: res.user.description,
                   date: res.user.date,
                   department: res.user.department,
                   id: res.user._id,
@@ -62,7 +62,9 @@ const AddAppointment=(props)=> {
           <div className="login">
             <div className="form">
               <form noValidate onSubmit={handleSubmit}>
-                <span><u>Create Appointment</u></span>
+                <span>
+                  <u>Create Appointment</u>
+                </span>
                 <div className="form-user-type">Disease:</div>
                 <input
                   type="disease"
@@ -87,9 +89,11 @@ const AddAppointment=(props)=> {
                   id="description"
                 />
                 <p className="error">
-                  {errors.description && touched.description && errors.description}
+                  {errors.description &&
+                    touched.description &&
+                    errors.description}
                 </p>
-                
+
                 <div className="form-user-type">Appointment Date</div>
                 <input
                   name="date"
@@ -98,7 +102,7 @@ const AddAppointment=(props)=> {
                   value={values.date}
                   id="date"
                   defaultValue="2022-08-19"
-                    sx={{ width: 360 }}
+                  sx={{ width: 360 }}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -108,29 +112,28 @@ const AddAppointment=(props)=> {
                 </p>
 
                 <div className="form-user-type">Department</div>
-                  <Select
-                    name="department"
-                    type="department"
-                    value={values.department}
-                    id="department"
-                    sx={{ width: 360 }}
-                    onChange={handleChange}
-                  >
-                   <MenuItem value={10}>Cardiology</MenuItem>
+                <Select
+                  name="department"
+                  type="department"
+                  value={values.department}
+                  id="department"
+                  sx={{ width: 360 }}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Cardiology</MenuItem>
                   <MenuItem value={20}>Orthopedics</MenuItem>
                   <MenuItem value={30}>Radiology/Pathology</MenuItem>
                   <MenuItem value={40}>Neurology</MenuItem>
                   <MenuItem value={50}>General Medicine</MenuItem>
                   <MenuItem value={60}>ENT</MenuItem>
-                  </Select>
-                
+                </Select>
+
                 <p className="error">
                   {errors.department && touched.department && errors.department}
                 </p>
 
-
                 <button type="submit" variant="contained" color="success">
-                Submit and Create Appointment
+                  Submit and Create Appointment
                 </button>
                 <Button
                   onClick={() => naviagte("/Home")}
@@ -147,6 +150,6 @@ const AddAppointment=(props)=> {
       </Formik>
     </>
   );
-}
+};
 
 export default AddAppointment;

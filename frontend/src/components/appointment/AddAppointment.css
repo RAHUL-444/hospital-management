@@ -70,7 +70,7 @@ body {
 }
 
 .form span {
-  font-size: 40px;
+  font-size: 40px!important;
   color: #4b6cb7;
 }
 

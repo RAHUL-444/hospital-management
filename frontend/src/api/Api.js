@@ -1,6 +1,6 @@
 import axios from "axios";
-
 import ToastN from "../feature/ToastN";
+
 export const sendRequest = async (type, values) => {
   const res = await axios
     .post(`http://localhost:5000/api/user/${type}`, {
@@ -13,15 +13,23 @@ export const sendRequest = async (type, values) => {
       id: values.id,
     })
     .catch((err) => {
-      console.log(err);
-      console.log(err.response.data.status);
-      if (err.response.data.status === 401) {
-        ToastN(err.response.data.message, "warning");
-      } else if (err.response.data.status === 402) {
-        ToastN(err.response.data.message, "warning");
-      } else {
-        ToastN("Something Went Wrong. Try Again", "warning");
-      }
+      ToastN(err.response.data.message, "warning");
+    });
+
+  const data = await res.data;
+  return data;
+};
+export const sendAddingAppointmentRequest = async (values,userID) => {
+  const res = await axios
+    .post("http://localhost:5000/api/blog/add", {
+      disease: values.disease,
+      description: values.description,
+      department: values.department,
+      date: values.date,
+      user: userID,
+    })
+    .catch((err) => {
+      ToastN(err.response.data.message, "warning");
     });
 
   const data = await res.data;

@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, logout, selectUser } from "../store/index";
+import { logout, selectUser } from "../store/index";
 import { useStyles } from "./utils";
 const Header = () => {
   const classes = useStyles();

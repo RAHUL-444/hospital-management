@@ -31,7 +31,6 @@ const schema = Yup.object().shape({
 
 const SignUpPage = (props) => {
   const naviagte = useNavigate();
-
   const dispatch = useDispatch();
   return (
     <>

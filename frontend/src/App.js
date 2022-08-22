@@ -75,17 +75,13 @@ function App() {
           path={`${process.env.PUBLIC_URL + "/Home"}`}
           element={<Home />}
         />
-        {/* <Route path="./" element={<Blogs />} /> */}
-        {/* <Route path="/Appointment/Create-Appointment" element={<AddBlog />} /> */}
-        <Route path="/Appointment/Create-Appointment" element={<AddAppointment />} />
+        <Route
+          path="/Appointment/Create-Appointment"
+          element={<AddAppointment />}
+        />
         <Route path="/Appointments" element={<UserBlogs />} />
         <Route path="/Appointments/:id" element={<BlogDetail />} />{" "}
-        <Route path="/Profile" element={<Profile />} />{" "}
-        {/* <Route
-          path={`${process.env.PUBLIC_URL + "/Authentication"}`}
-          element={<Auth />}
-        />{" "} */}
-        {/* <Route path={`${process.env.PUBLIC_URL + "/Auth"}`} element={<Auth />} /> */}
+        <Route path="/Profile" element={<Profile />} />
         <Route
           path={`${process.env.PUBLIC_URL + "*"}`}
           element={<PageNotFound />}

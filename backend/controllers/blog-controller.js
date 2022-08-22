@@ -10,13 +10,13 @@ export const getAllBlogs = async (req, res, next) => {
     return console.log(err);
   }
   if (!blogs) {
-    return res.status(404).json({ message: "No Blogs Found" });
+    return res.status(404).json({ status: 404, message: "No Blogs Found" });
   }
-  return res.status(200).json({ blogs:blogs });
+  return res.status(200).json({ status: 200, blogs: blogs });
 };
 
 export const addBlog = async (req, res, next) => {
-  const { title, description,department, date,user } = req.body;
+  const { disease, description, department, date, user } = req.body;
   let existingUser;
   try {
     existingUser = await User.findById(user);
@@ -24,10 +24,12 @@ export const addBlog = async (req, res, next) => {
     return console.log(err);
   }
   if (!existingUser) {
-    return res.status(400).json({ message: "Unable TO FInd User By This ID" });
+    return res
+      .status(400)
+      .json({ status: 400, message: "Unable TO FInd User By This ID" });
   }
   const blog = new Blog({
-    title,
+    disease,
     description,
     department,
     date,
@@ -42,27 +44,29 @@ export const addBlog = async (req, res, next) => {
     await session.commitTransaction();
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ message: err });
+    return res.status(500).json({ status: 400, message: err });
   }
-  return res.status(200).json({ blog });
+  return res.status(200).json({ status: 200, blog });
 };
 
 export const updateBlog = async (req, res, next) => {
-  const { title, description } = req.body;
+  const { disease, description } = req.body;
   const blogId = req.params.id;
   let blog;
   try {
     blog = await Blog.findByIdAndUpdate(blogId, {
-      title,
+      disease,
       description,
     });
   } catch (err) {
     return console.log(err);
   }
   if (!blog) {
-    return res.status(500).json({ message: "Unable To Update The Blog" });
+    return res
+      .status(500)
+      .json({ status: 400, message: "Unable To Update The Blog" });
   }
-  return res.status(200).json({ blog:blog });
+  return res.status(200).json({ status: 200, blog: blog });
 };
 
 export const getById = async (req, res, next) => {
@@ -74,9 +78,9 @@ export const getById = async (req, res, next) => {
     return console.log(err);
   }
   if (!blog) {
-    return res.status(404).json({ message: "No Blog Found" });
+    return res.status(404).json({ status: 404, message: "No Blog Found" });
   }
-  return res.status(200).json({ blog });
+  return res.status(200).json({ status: 200, blog });
 };
 
 export const deleteBlog = async (req, res, next) => {
@@ -91,9 +95,9 @@ export const deleteBlog = async (req, res, next) => {
     console.log(err);
   }
   if (!blog) {
-    return res.status(500).json({ message: "Unable To Delete" });
+    return res.status(500).json({ status: 500, message: "Unable To Delete" });
   }
-  return res.status(200).json({ message: "Successfully Delete" });
+  return res.status(200).json({ status: 200, message: "Successfully Delete" });
 };
 
 export const getByUserId = async (req, res, next) => {
@@ -105,7 +109,7 @@ export const getByUserId = async (req, res, next) => {
     return console.log(err);
   }
   if (!userBlogs) {
-    return res.status(404).json({ message: "No Blog Found" });
+    return res.status(404).json({ status: 404, message: "No Blog Found" });
   }
-  return res.status(200).json({ user: userBlogs });
+  return res.status(200).json({ status: 200, user: userBlogs });
 };
