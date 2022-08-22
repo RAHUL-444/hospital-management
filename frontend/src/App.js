@@ -4,7 +4,7 @@ import UserBlogs from "./components/UserBlogs";
 import BlogDetail from "./components/BlogDetail";
 // import AddBlog from "./components/AddBlog";
 import AddAppointment from "./components/appointment/AddAppointment";
-import Profile from "./components/Profile";
+import Profile from "./components/profile/Profile";
 import Header from "./components/Header";
 import PageNotFound from "./components/PageNotFound";
 import React, { useState, useEffect } from "react";

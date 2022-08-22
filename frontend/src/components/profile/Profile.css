@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+.profile span {
+  font-size: 40px;
+  color: #4b6cb7;
+  font-family: 'Comfortaa', cursive;
+}
+
+.error{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color:red;
+}

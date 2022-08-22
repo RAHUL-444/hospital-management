@@ -1,8 +1,9 @@
+import './Profile.css'
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectUser } from "../store/index";
+import { selectUser } from "../../store/index";
 import { Box, InputLabel, Typography } from "@mui/material";
-import { useStyles } from "./utils";
+import { useStyles } from "../utils";
 
 const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const Profile = () => {
@@ -50,6 +51,7 @@ const Profile = () => {
             "linear-gradient(90deg, rgba(58,75,180,1) 2%, rgba(116,49,110,1) 36%, rgba(2,0,161,1) 73%, rgba(69,92,252,1) 100%)",
           boxShadow: "10px 10px 20px #ccc",
         }}
+        className="profile"
       >
         <Box
         >
@@ -61,7 +63,7 @@ const Profile = () => {
             variant="h2"
             textAlign={"center"}
           >
-            <u>User Profile</u>
+            <span><u>User Profile</u></span>
           </Typography>
           <InputLabel className={classes.font} sx={labelStyles}>
             Name : <>{user.name}</>
