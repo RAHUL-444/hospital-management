@@ -21,7 +21,7 @@ const Auth = () => {
     gender: "",
     type: "",
     id: "",
-    birthday: "",
+    date: "",
   });
 
   const [isSignup, setIsSignup] = useState(false);
@@ -38,7 +38,7 @@ const Auth = () => {
         email: inputs.email,
         password: inputs.password,
         gender: inputs.gender,
-        birthday: inputs.birthday,
+        date: inputs.date,
         type: inputs.type,
         id: inputs.id,
       })
@@ -54,7 +54,7 @@ const Auth = () => {
             email: inputs.email,
             password: inputs.password,
             gender: inputs.gender,
-            birthday: inputs.birthday,
+            date: inputs.date,
             type: inputs.type,
             id: inputs.id,
             isloggedIN: true,
@@ -85,7 +85,7 @@ const Auth = () => {
               email: inputs.email,
               password: inputs.password,
               gender: inputs.gender,
-              birthday: inputs.birthday,
+              date: inputs.date,
               type: inputs.type,
               id: inputs.id,
               isloggedIN: true,
@@ -217,12 +217,12 @@ const Auth = () => {
 
           {isSignup && (
             <>
-              <InputLabel id="demo-simple-select-label">Birthday</InputLabel>
+              <InputLabel id="demo-simple-select-label">date</InputLabel>
               <TextField
-                name="birthday"
-                // label="Birthday"
+                name="date"
+                // label="date"
                 onChange={handleChange}
-                value={inputs.birthday}
+                value={inputs.date}
                 type="date"
                 defaultValue="2022-08-19"
                 sx={{ width: 600 }}

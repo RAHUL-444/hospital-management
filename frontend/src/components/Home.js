@@ -23,7 +23,7 @@ const Home = () => {
           name: response.data.user.name,
           email: response.data.user.email,
           password: response.data.user.password,
-          birthday: response.data.user.birthday,
+          date: response.data.user.date,
           gender: response.data.user.gender,
           type: response.data.user.type,
           id: response.data.user._id,

@@ -66,7 +66,7 @@ const Profile = () => {
             Email : <>{user.email}</>
           </InputLabel>
           <InputLabel className={classes.font} sx={labelStyles}>
-            Birthday : <>{user.birthday}</>
+            Birthday : <>{user.date}</>
           </InputLabel>
           <InputLabel className={classes.font} sx={labelStyles}>
             Gender : <>{userGender}</>

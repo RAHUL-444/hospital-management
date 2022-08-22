@@ -21,8 +21,8 @@ const schema = Yup.object().shape({
     .min(6, "Password must be at least 8 characters"),
   gender: Yup.string()
     .required("Gender is a required field"),
-  birthday: Yup.string()
-    .required("Birthday is a required field"),
+  date: Yup.string()
+    .required("date is a required field"),
     changepassword: Yup.string().when("password", {
       is: val => (val && val.length > 0 ? true : false),
       then: Yup.string().oneOf(
@@ -47,7 +47,7 @@ function SignUpPage() {
           gender: "",
           type: "",
           id: "",
-          birthday: "",
+          date: "",
           changepassword: ""
         }}
         onSubmit={(values) => {
@@ -60,7 +60,7 @@ function SignUpPage() {
                   email: res.user.email,
                   password: res.user.password,
                   gender: res.user.gender,
-                  birthday: res.user.birthday,
+                  date: res.user.date,
                   type: res.user.type,
                   id: res.user._id,
                   isloggedIN: true,
@@ -147,11 +147,11 @@ function SignUpPage() {
 
                 <div className="form-user-type">Date of Birth</div>
                 <input
-                  name="birthday"
-                  type="birthday"
+                  name="date"
+                  type="date"
                   onChange={handleChange}
-                  value={values.birthday}
-                  id="birthday"
+                  value={values.date}
+                  id="date"
                   defaultValue="2022-08-19"
                     sx={{ width: 360 }}
                   InputLabelProps={{
@@ -159,7 +159,7 @@ function SignUpPage() {
                   }}
                 />
                 <p className="error">
-                  {errors.birthday && touched.birthday && errors.birthday}
+                  {errors.date && touched.date && errors.date}
                 </p>
 
                 <div className="form-user-type">Password</div>

@@ -8,7 +8,7 @@ export const sendRequest = async (type, values) => {
       email: values.email,
       password: values.password,
       gender: values.gender,
-      birthday: values.birthday,
+      date: values.date,
       type: values.type,
       id: values.id,
     })

@@ -15,7 +15,7 @@ export const getAllUser = async (req, res, next) => {
 };
 
 export const signup = async (req, res, next) => {
-  const { name, email, password, gender, birthday, type='5', id } = req.body;
+  const { name, email, password, gender, date, type='5', id } = req.body;
   let existingUser;
   try {
     existingUser = await User.findOne({ email });
@@ -34,7 +34,7 @@ export const signup = async (req, res, next) => {
     email,
     password: hashedPassword,
     gender,
-    birthday,
+    date,
     type,
     id,
     blogs: [],
@@ -49,7 +49,7 @@ export const signup = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  const { name, email, password, gender, birthday, type='5', id } = req.body;
+  const { name, email, password, gender, date, type='5', id } = req.body;
   let existingUser;
   let existingUserType = false;
   try {

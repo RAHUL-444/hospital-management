@@ -35,7 +35,7 @@ function LoginPage() {
           gender: "",
           type: "",
           id: "",
-          birthday: "",
+          date: "",
         }}
         onSubmit={(values) => {
           sendRequest("login", values).then((res) => {
@@ -47,7 +47,7 @@ function LoginPage() {
                   email: res.user.email,
                   password: res.user.password,
                   gender: res.user.gender,
-                  birthday: res.user.birthday,
+                  date: res.user.date,
                   type: res.user.type,
                   id: res.user._id,
                   isloggedIN: true,
