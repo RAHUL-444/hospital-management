@@ -1,14 +1,14 @@
 import "./LoginPage.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { sendRequest } from "../Api";
+import { sendRequest } from "../../api/Api";
 import { useNavigate } from "react-router-dom";
 import ToastN from "../../feature/ToastN";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { login } from "../../store/index";
 import { useDispatch } from "react-redux";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Button} from "@mui/material";
 
 const schema = Yup.object().shape({
   type: Yup.string().required("User Type is a required field"),

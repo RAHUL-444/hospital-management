@@ -8,7 +8,7 @@ import Header from "./components/Header";
 import PageNotFound from "./components/PageNotFound";
 import React, {useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Auth from "./components/Auth";
+// import Auth from "./components/notRequired/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { login } from "./store/index";
@@ -77,11 +77,11 @@ function App() {
         <Route path="/Appointments" element={<UserBlogs />} />
         <Route path="/Appointments/:id" element={<BlogDetail />} />{" "}
         <Route path="/Profile" element={<Profile />} />{" "}
-        <Route
+        {/* <Route
           path={`${process.env.PUBLIC_URL + "/Authentication"}`}
           element={<Auth />}
-        />{" "}
-        <Route path={`${process.env.PUBLIC_URL + "/Auth"}`} element={<Auth />} />
+        />{" "} */}
+        {/* <Route path={`${process.env.PUBLIC_URL + "/Auth"}`} element={<Auth />} /> */}
         <Route path={`${process.env.PUBLIC_URL + "*"}`} element={<PageNotFound />} />
         <Route path={`${process.env.PUBLIC_URL + "/Login-Page"}`} element={<LoginPage />} />
         <Route path={`${process.env.PUBLIC_URL + "/SignUp-Page"}`} element={<SignUpPage />} />

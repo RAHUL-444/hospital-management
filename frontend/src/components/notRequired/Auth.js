@@ -1,13 +1,11 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import ToastN from "../feature/ToastN";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../store/index";
-import { login } from "../store/index";
+import ToastN from "../../feature/ToastN";
+import { useDispatch } from "react-redux";
+import { login } from "../../index";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/index";
 import { Box, InputLabel, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useStyles } from "./utils";
 
 const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
