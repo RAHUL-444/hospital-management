@@ -33,40 +33,42 @@ const Header = () => {
         </Typography>
         {isLoggedIn && (
           <Box display="flex" marginLeft={"auto"} marginRight="auto">
-            <Tabs
-              textColor="inherit"
-              value={value}
-            >
+            <Tabs textColor="inherit" value={value}>
               <Tab
                 className={classes.font}
                 LinkComponent={Link}
                 to="/Home"
                 label="Home"
               />
-              <Tab
-                className={classes.font}
-                LinkComponent={Link}
-                to="/Appointments"
-                label="All Appointments"
-              />
-              
+              {isLoggedIn.type !== 1 && (
+                <Tab
+                  className={classes.font}
+                  LinkComponent={Link}
+                  to="/Appointments"
+                  label="All Appointments"
+                />
+              )}
+
               <Tab
                 className={classes.font}
                 LinkComponent={Link}
                 to="/Profile"
                 label="My Profile"
               />
-              <Tab
-                className={classes.font}
-                LinkComponent={Link}
-                to="/Appointment/Create-Appointment"
-                label="Create Appointment"
-              />
+
+              {isLoggedIn.type !== 1 && (
+                <Tab
+                  className={classes.font}
+                  LinkComponent={Link}
+                  to="/Appointment/Create-Appointment"
+                  label="Create Appointment"
+                />
+              )}
             </Tabs>
           </Box>
         )}
         <Box display="flex" marginLeft="auto">
-         {isLoggedIn && (
+          {isLoggedIn && (
             <Button
               onClick={() => {
                 dispath(logout());

@@ -20,12 +20,14 @@ const Home = () => {
       getUser();
       dispath(
         login({
-          name: response.data.user.name,
+          lname: response.data.user.lname,
+          fname: response.data.user.fname,
           email: response.data.user.email,
           password: response.data.user.password,
           date: response.data.user.date,
           gender: response.data.user.gender,
           type: response.data.user.type,
+          blood: response.data.user.blood,
           id: response.data.user._id,
           blogs: response.data.user.blogs,
         })
@@ -36,11 +38,14 @@ const Home = () => {
     dispath,
     user,
     user.email,
-    user.name,
+    user.lname,
+    user.fname,
     user.password,
     user.gender,
     user.blogs,
+    user.blood,
     user.type,
+    user.id,
   ]);
   return (
     <>
@@ -85,10 +90,10 @@ const Home = () => {
               style={{
                 backgroundColor: "yellow",
                 textTransform: "uppercase",
-                textAlign: 'center'
+                textAlign: "center",
               }}
             >
-              Hi! {user.name} <br/> Welcome to HOSPITAL MANAGEMENT SYSTEM
+              Hi! {user.fname} {user.lname} <br /> Welcome to HOSPITAL MANAGEMENT SYSTEM
             </div>
           </div>
         </div>

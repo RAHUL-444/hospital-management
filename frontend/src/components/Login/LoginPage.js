@@ -34,8 +34,12 @@ const LoginPage = (props) => {
           password: "",
           gender: "",
           type: "",
+          blood: "",
           id: "",
           date: "",
+          fname: "",
+          lname: "",
+          changepassword: "",
         }}
         onSubmit={(values) => {
           sendRequest("login", values).then((res) => {
@@ -43,13 +47,15 @@ const LoginPage = (props) => {
               ToastN("Login Successfull", "success");
               dispatch(
                 login({
-                  name: res.user.name,
-                  email: res.user.email,
-                  password: res.user.password,
-                  gender: res.user.gender,
-                  date: res.user.date,
-                  type: res.user.type,
-                  id: res.user._id,
+                  fname: values.fname,
+                  lname: values.lname,
+                  email: values.email,
+                  password: values.password,
+                  blood: values.blood,
+                  gender: values.gender,
+                  date: values.date,
+                  type: 1,
+                  id: values._id,
                   isloggedIN: true,
                 })
               );
@@ -85,7 +91,7 @@ const LoginPage = (props) => {
                   >
                     <MenuItem value={1}>Patient</MenuItem>
                     <MenuItem value={2}>Doctor</MenuItem>
-                    {/* <MenuItem value={3}>Admin</MenuItem> */}
+                    <MenuItem value={3}>Admin</MenuItem>
                   </Select>
                 </div>
                 <p className="error">

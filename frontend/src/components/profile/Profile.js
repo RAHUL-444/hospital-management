@@ -1,16 +1,22 @@
-import './Profile.css'
+import "./Profile.css";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/index";
 import { Box, InputLabel, Typography } from "@mui/material";
 import { useStyles } from "../utils";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const labelStyles = { mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" };
 const Profile = () => {
   const classes = useStyles();
+
+  const naviagte = useNavigate();
   const user = useSelector(selectUser);
   let userType = "";
   let userGender = "";
+  let userBlood = "";
+
   if (user.type === 1) {
     userType = "Patient";
   } else if (user.type === 2) {
@@ -19,6 +25,26 @@ const Profile = () => {
     userType = "Admin";
   } else {
     userType = "NA";
+  }
+
+  if (user.blood === 1) {
+    userBlood = "O +ve";
+  } else if (user.blood === 2) {
+    userBlood = "O -ve";
+  } else if (user.blood === 3) {
+    userBlood = "B +ve";
+  } else if (user.blood === 4) {
+    userBlood = "B -ve";
+  } else if (user.blood === 5) {
+    userBlood = "A +ve";
+  } else if (user.blood === 6) {
+    userBlood = "A -ve";
+  } else if (user.blood === 7) {
+    userBlood = "AB +ve";
+  } else if (user.blood === 8) {
+    userBlood = "AB -ve";
+  } else {
+    userBlood = "NA";
   }
 
   if (user.gender === 1) {
@@ -53,8 +79,7 @@ const Profile = () => {
         }}
         className="profile"
       >
-        <Box
-        >
+        <Box>
           <Typography
             className={classes.font}
             fontWeight={"bold"}
@@ -63,12 +88,16 @@ const Profile = () => {
             variant="h2"
             textAlign={"center"}
           >
-            <span><u>User Profile</u></span>
+            <span>
+              <u>User Profile</u>
+            </span>
           </Typography>
           <InputLabel className={classes.font} sx={labelStyles}>
-            Name : <>{user.name}</>
+            First Name : <>{user.fname}</>
           </InputLabel>
-
+          <InputLabel className={classes.font} sx={labelStyles}>
+            Last Name : <>{user.lname}</>
+          </InputLabel>
           <InputLabel className={classes.font} sx={labelStyles}>
             Email : <>{user.email}</>
           </InputLabel>
@@ -79,9 +108,20 @@ const Profile = () => {
             Gender : <>{userGender}</>
           </InputLabel>
           <InputLabel className={classes.font} sx={labelStyles}>
+            Blood : <>{userBlood}</>
+          </InputLabel>
+          <InputLabel className={classes.font} sx={labelStyles}>
             User Type : <>{userType}</>
           </InputLabel>
         </Box>
+        <Button
+          onClick={() => naviagte("/Home")}
+          sx={{ borderRadius: 3, marginTop: 3 }}
+          variant="contained"
+          color="secondary"
+        >
+          Return to Home
+        </Button>
       </div>
     </>
   );

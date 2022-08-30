@@ -23,15 +23,18 @@ function App() {
   const res = useSelector((state) => state.user);
   const [defaultData, setDefaultData] = useState([
     {
-      name: "",
       email: "",
       password: "",
       isloggedIN: false,
-      date: "",
       gender: "",
       type: "",
       blogs: [],
+      blood: "",
       id: "",
+      date: "",
+      fname: "",
+      lname: "",
+      changepassword: "",
     },
   ]);
   useEffect(() => {
@@ -46,13 +49,17 @@ function App() {
       );
       dispatch(
         login({
-          name: response.data.user.name,
+          fname: response.data.user.fname,
+          lname: response.data.user.lname,
           email: response.data.user.email,
           password: response.data.user.password,
-          date: response.data.user.date,
+          blood: response.data.user.blood,
           gender: response.data.user.gender,
+          date: response.data.user.date,
           type: response.data.user.type,
           id: response.data.user._id,
+          isloggedIN: true,
+
           blogs: response.data.user.blogs,
         })
       );
