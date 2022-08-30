@@ -44,8 +44,8 @@ const Header = () => {
                 <Tab
                   className={classes.font}
                   LinkComponent={Link}
-                  to="/Appointments"
-                  label="All Appointments"
+                  to="/Users"
+                  label="All Users"
                 />
               )}
 
@@ -56,7 +56,7 @@ const Header = () => {
                 label="My Profile"
               />
 
-              {isLoggedIn.type !== 1 && (
+              {isLoggedIn.type !== 1 && isLoggedIn.type !== 2 &&(
                 <Tab
                   className={classes.font}
                   LinkComponent={Link}

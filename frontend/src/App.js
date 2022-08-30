@@ -87,7 +87,7 @@ function App() {
           path="/Appointment/Create-Appointment"
           element={<AddAppointment />}
         />
-        <Route path="/Appointments" element={<UserBlogs />} />
+        <Route path="/Users" element={<UserBlogs />} />
         <Route path="/Appointments/:id" element={<BlogDetail />} />{" "}
         <Route path="/Profile" element={<Profile />} />
         <Route
