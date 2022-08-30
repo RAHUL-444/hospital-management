@@ -85,7 +85,7 @@ const LoginPage = (props) => {
                   >
                     <MenuItem value={1}>Patient</MenuItem>
                     <MenuItem value={2}>Doctor</MenuItem>
-                    <MenuItem value={3}>Admin</MenuItem>
+                    {/* <MenuItem value={3}>Admin</MenuItem> */}
                   </Select>
                 </div>
                 <p className="error">

@@ -15,9 +15,13 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .required("Email is a required field")
     .email("Invalid email format"),
+  name: Yup.string()
+    .required("Name is a required field")
+    .min(2, "Name is too Short")
+    .max(20, "Name is too Big"),
   password: Yup.string()
     .required("Password is a required field")
-    .min(6, "Password must be at least 8 characters"),
+    .min(8, "Password must be at least 8 characters"),
   gender: Yup.string().required("Gender is a required field"),
   date: Yup.string().required("date is a required field"),
   changepassword: Yup.string().when("password", {
@@ -44,6 +48,7 @@ const SignUpPage = (props) => {
           type: "",
           id: "",
           date: "",
+          name:'',
           changepassword: "",
         }}
         onSubmit={(values) => {
@@ -118,7 +123,7 @@ const SignUpPage = (props) => {
                 >
                   <MenuItem value={1}>Male</MenuItem>
                   <MenuItem value={2}>Female</MenuItem>
-                  <MenuItem value={3}>TRANS</MenuItem>
+                  <MenuItem value={3}>Trans</MenuItem>
                 </Select>
                 <p className="error">
                   {errors.gender && touched.gender && errors.gender}
@@ -135,7 +140,7 @@ const SignUpPage = (props) => {
                 >
                   <MenuItem value={1}>Patient</MenuItem>
                   <MenuItem value={2}>Doctor</MenuItem>
-                  <MenuItem value={3}>Admin</MenuItem>
+                  {/* <MenuItem value={3}>Admin</MenuItem> */}
                 </Select>
 
                 <p className="error">
