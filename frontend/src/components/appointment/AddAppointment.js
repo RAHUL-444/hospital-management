@@ -37,6 +37,7 @@ const AddAppointment = (props) => {
           sendAddingAppointmentRequest(values,user.user.id).then((res) => {
             if (res.status === 200) {
               ToastN("Appointment Created Successfully", "success");
+              naviagte("/Appointments");
               dispatch(
                 allAppointment({
                   disease: res.user.disease,
@@ -46,7 +47,7 @@ const AddAppointment = (props) => {
                   id: res.user._id,
                 })
               );
-              naviagte("/Home");
+              
             }
           });
         }}

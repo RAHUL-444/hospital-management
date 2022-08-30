@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { login } from "../store/index";
 const Home = () => {
-  const user = useSelector(selectUser);  
+  const user = useSelector(selectUser);
   const dispath = useDispatch();
   useEffect(() => {
     async function getUser() {
@@ -46,9 +46,7 @@ const Home = () => {
     <>
       <div
         style={{
-          backgroundImage: `url(${
-            process.env.PUBLIC_URL + "/img/home-bg.jpg"
-          })`,
+          backgroundImage: `url(${process.env.PUBLIC_URL + "/img/home-1.jpg"})`,
           backgroundRepeat: "no-repeat",
           height: "100vh",
           backgroundPosition: "center",
@@ -83,8 +81,14 @@ const Home = () => {
               color: "black",
             }}
           >
-            <div>
-              Hi! "{user.name}" &nbsp; to &nbsp; HOSPITAL MANAGEMENT SYSTEM
+            <div
+              style={{
+                backgroundColor: "yellow",
+                textTransform: "uppercase",
+                textAlign: 'center'
+              }}
+            >
+              Hi! {user.name} <br/> Welcome to HOSPITAL MANAGEMENT SYSTEM
             </div>
           </div>
         </div>
