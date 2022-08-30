@@ -15,6 +15,7 @@ import axios from "axios";
 import { login } from "./store/index";
 import LoginPage from "./components/Login/LoginPage";
 import SignUpPage from "./components/Login/SignUpPage";
+import DoctorSignUpPage from "./components/Doctor/DoctorSignUpPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -100,6 +101,10 @@ function App() {
         <Route
           path={`${process.env.PUBLIC_URL + "/SignUp-Page"}`}
           element={<SignUpPage />}
+        />
+        <Route
+          path={`${process.env.PUBLIC_URL + "/Doctor/Add-Doctor"}`}
+          element={<DoctorSignUpPage />}
         />
       </Routes>
     </>

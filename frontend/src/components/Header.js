@@ -60,8 +60,8 @@ const Header = () => {
                 <Tab
                   className={classes.font}
                   LinkComponent={Link}
-                  to="/Appointment/Create-Appointment"
-                  label="Create Appointment"
+                  to="/Doctor/Add-Doctor"
+                  label="Add Doctor"
                 />
               )}
             </Tabs>

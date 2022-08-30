@@ -21,6 +21,16 @@ export const sendRequest = async (type, values) => {
   const data = await res.data;
   return data;
 };
+export const getUser = async () => {
+  const res = await axios
+    .post(`http://localhost:5000/api/user/`)
+    .catch((err) => {
+      ToastN(err.response.data.message, "warning");
+    });
+
+  const data = await res.data;
+  return data;
+};
 export const sendAddingAppointmentRequest = async (values, userID) => {
   const res = await axios
     .post("http://localhost:5000/api/blog/add", {

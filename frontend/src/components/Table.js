@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useStyles } from "./utils";
 import { blueGrey } from "@mui/material/colors";
-const Blog = ({
+const Table = ({
   title,
   description,  
   userName,  
@@ -99,4 +99,4 @@ const Blog = ({
   );
 };
 
-export default Blog;
+export default Table;

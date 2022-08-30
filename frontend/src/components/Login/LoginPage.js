@@ -54,7 +54,7 @@ const LoginPage = (props) => {
                   blood: values.blood,
                   gender: values.gender,
                   date: values.date,
-                  type: 1,
+                  type: values.type,
                   id: values._id,
                   isloggedIN: true,
                 })
