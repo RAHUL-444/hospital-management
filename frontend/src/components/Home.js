@@ -51,7 +51,7 @@ const Home = () => {
     <>
       <div
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL + "/img/home-1.jpg"})`,
+          // backgroundImage: `url(${process.env.PUBLIC_URL + "/img/home-1.jpg"})`,
           backgroundRepeat: "no-repeat",
           height: "100vh",
           backgroundPosition: "center",
@@ -64,7 +64,7 @@ const Home = () => {
             display: "flex",
             justifyContent: "center",
             zIndex: "50",
-            height: "100vh",
+            // height: "100vh",
             fontWeight: "800",
             fontSize: "2.125rem",
             lineHeight: "1.235",

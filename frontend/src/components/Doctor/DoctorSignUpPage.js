@@ -72,25 +72,23 @@ const DoctorSignUpPage = (props) => {
             id: values._id,
             isloggedIN: true,
           };
-          console.log("values", values);
-          console.log("data", data);
           sendRequest("signup", data).then((res) => {
             if (res.status === 200) {
-              ToastN("Sign up Successfull", "success");
-              dispatch(
-                login({
-                  fname: res.user.fname,
-                  lname: res.user.lname,
-                  email: res.user.email,
-                  password: res.user.password,
-                  blood: res.user.blood,
-                  gender: res.user.gender,
-                  date: res.user.date,
-                  type: res.user.type,
-                  id: res.user._id,
-                  isloggedIN: true,
-                })
-              );
+              ToastN("Appointing a Doctor was Successfull", "success");
+              // dispatch(
+              //   login({
+              //     fname: res.user.fname,
+              //     lname: res.user.lname,
+              //     email: res.user.email,
+              //     password: res.user.password,
+              //     blood: res.user.blood,
+              //     gender: res.user.gender,
+              //     date: res.user.date,
+              //     type: res.user.type,
+              //     id: res.user._id,
+              //     isloggedIN: true,
+              //   })
+              // );
               naviagte("/Home");
             }
           });

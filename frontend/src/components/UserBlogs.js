@@ -48,11 +48,6 @@ const UserBlogs = () => {
       return student;
     });
 
-  console.log("allPatient", allPatient);
-  console.log("allDoctors", allDoctors);
-  console.log("allAdmins", allAdmins);
-  console.log("userdataFromRedux", userdataFromRedux);
-
   return (
     <>
       {/* for Admin */}
@@ -74,7 +69,14 @@ const UserBlogs = () => {
           variant="h2"
           textAlign={"center"}
         >
-          <u>All Admins</u>
+          <u
+            style={{
+              color: "white",
+              fontSize: "50px",
+            }}
+          >
+            All Admins
+          </u>
         </Typography>
         <div
           style={{
@@ -117,7 +119,14 @@ const UserBlogs = () => {
           variant="h2"
           textAlign={"center"}
         >
-          <u>All Doctors</u>
+          <u
+            style={{
+              color: "white",
+              fontSize: "50px",
+            }}
+          >
+            All Doctors
+          </u>
         </Typography>
         <div
           style={{
@@ -161,7 +170,14 @@ const UserBlogs = () => {
           variant="h2"
           textAlign={"center"}
         >
-          <u>All Patients</u>
+          <u
+            style={{
+              color: "white",
+              fontSize: "50px",
+            }}
+          >
+            All Patients
+          </u>
         </Typography>
         <div
           style={{

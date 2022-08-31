@@ -47,12 +47,6 @@ const DoctorBlogs = () => {
     .map(function (student) {
       return student;
     });
-
-  console.log("allPatient", allPatient);
-  console.log("allDoctors", allDoctors);
-  console.log("allAdmins", allAdmins);
-  console.log("userdataFromRedux", userdataFromRedux);
-
   return (
     <>
       {" "}
@@ -74,7 +68,14 @@ const DoctorBlogs = () => {
           variant="h2"
           textAlign={"center"}
         >
-          <u>All Patients</u>
+          <u
+            style={{
+              color: "white",
+              fontSize: "50px",
+            }}
+          >
+            All Patients
+          </u>
         </Typography>
         <div
           style={{

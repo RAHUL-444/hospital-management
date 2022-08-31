@@ -72,8 +72,6 @@ const SignUpPage = (props) => {
             id: values._id,
             isloggedIN: true,
           };
-          console.log("values", values);
-          console.log("data", data);
           sendRequest("signup", data).then((res) => {
             if (res.status === 200) {
               ToastN("Sign up Successfull", "success");
