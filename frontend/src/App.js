@@ -2,6 +2,7 @@ import Home from "./components/Home";
 // import Blogs from "./components/Blogs";
 import UserBlogs from "./components/UserBlogs";
 import BlogDetail from "./components/BlogDetail";
+import DoctorsBlogs from "./components/DoctorBlogs";
 // import AddBlog from "./components/AddBlog";
 import AddAppointment from "./components/appointment/AddAppointment";
 import Profile from "./components/profile/Profile";
@@ -88,6 +89,7 @@ function App() {
           element={<AddAppointment />}
         />
         <Route path="/Users" element={<UserBlogs />} />
+        <Route path="/All-Patients" element={<DoctorsBlogs />} />
         <Route path="/Appointments/:id" element={<BlogDetail />} />{" "}
         <Route path="/Profile" element={<Profile />} />
         <Route

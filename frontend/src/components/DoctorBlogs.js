@@ -7,7 +7,7 @@ import { selectUser } from "../store/index";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-const UserBlogs = () => {
+const DoctorBlogs = () => {
   const [user, setUser] = useState([]);
   const classes = useStyles();
   const userdataFromRedux = useSelector(selectUser);
@@ -55,94 +55,7 @@ const UserBlogs = () => {
 
   return (
     <>
-      {/* for Admin */}
-
-      <div
-        style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          flexDirection: "column",
-        }}
-      >
-        <Typography
-          className={classes.font}
-          fontWeight={"bold"}
-          padding={3}
-          color="grey"
-          variant="h2"
-          textAlign={"center"}
-        >
-          <u>All Admins</u>
-        </Typography>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {user &&
-            userdataFromRedux.type === 3 &&
-            allAdmins.map((blog, index) => (
-              <TableDisplay
-                id={blog._id}
-                key={index}
-                blood={blog.blood}
-                fname={blog.fname}
-                lname={blog.lname}
-                email={blog.email}
-                date={blog.date}
-                type={blog.type}
-                gender={blog.gender}
-              />
-            ))}
-        </div>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          flexDirection: "column",
-        }}
-      >
-        <Typography
-          className={classes.font}
-          fontWeight={"bold"}
-          padding={3}
-          color="grey"
-          variant="h2"
-          textAlign={"center"}
-        >
-          <u>All Doctors</u>
-        </Typography>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {user &&
-            userdataFromRedux.type === 3 &&
-            allDoctors.map((blog, index) => (
-              <TableDisplay
-                id={blog._id}
-                key={index}
-                blood={blog.blood}
-                fname={blog.fname}
-                lname={blog.lname}
-                email={blog.email}
-                date={blog.date}
-                type={blog.type}
-                gender={blog.gender}
-              />
-            ))}
-        </div>
-      </div>
-
+      {" "}
       {/* for Patient */}
       <div
         style={{
@@ -204,4 +117,4 @@ const UserBlogs = () => {
   );
 };
 
-export default UserBlogs;
+export default DoctorBlogs;

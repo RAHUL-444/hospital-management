@@ -8,6 +8,7 @@ export const getAllUser = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
+  ``;
   if (!users) {
     return res.status(404).json({ message: "No Users Found" });
   }
@@ -15,7 +16,8 @@ export const getAllUser = async (req, res, next) => {
 };
 
 export const signup = async (req, res, next) => {
-  const { name, email, password, gender, date, type='5', id } = req.body;
+  const { fname, lname, email, password, gender, date, blood, type, id } =
+    req.body;
   let existingUser;
   try {
     existingUser = await User.findOne({ email });
@@ -25,15 +27,17 @@ export const signup = async (req, res, next) => {
   if (existingUser) {
     return res
       .status(400)
-      .json({status:401, message: "User Already Exists! Login Instead" });
+      .json({ status: 401, message: "User Already Exists! Login Instead" });
   }
   const hashedPassword = bcrypt.hashSync(password);
 
   const user = new User({
-    name,
+    fname,
+    lname,
     email,
     password: hashedPassword,
     gender,
+    blood,
     date,
     type,
     id,
@@ -45,36 +49,38 @@ export const signup = async (req, res, next) => {
   } catch (err) {
     return console.log(err);
   }
-  return res.status(201).json({ user,status:200});
+  return res.status(201).json({ user, status: 200 });
 };
 
 export const login = async (req, res, next) => {
-  const { name, email, password, gender, date, type='5', id } = req.body;
+  const { fname, lname, email, password, blood, gender, date, type, id } =
+    req.body;
   let existingUser;
-  let existingUserType = false;
   try {
     existingUser = await User.findOne({ email });
-    if (existingUser.type === type) {
-      existingUserType = true;
-    }
   } catch (err) {
     return console.log(err);
   }
   if (!existingUser) {
     return res
       .status(404)
-      .json({ status:404,message: "Couldnt Find User By This Email & type" });
+      .json({ status: 404, message: "Couldnt Find User By This Email & type" });
   }
   const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
   if (!isPasswordCorrect) {
-    return res.status(400).json({status:402, message: "Incorrect Password" });
+    return res.status(400).json({ status: 402, message: "Incorrect Password" });
   }
-  if (existingUserType == false) {
-    return res.status(400).json({status:405, message: "Incorrect User Type Selected" });
-  }
-  if (existingUserType == true && isPasswordCorrect && existingUser) {
-    return res
-      .status(200)
-      .json({status:200, message: "Login Successfull", user: existingUser });
+  if (isPasswordCorrect && existingUser) {
+    if (existingUser.type === type) {
+      return res.status(200).json({
+        status: 200,
+        message: "Login Successfull",
+        user: existingUser,
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ status: 402, message: "Incorrect User Type" });
+    }
   }
 };

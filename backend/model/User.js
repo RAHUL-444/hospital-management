@@ -3,9 +3,11 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  name: {
+  fname: {
     type: String,
-    required: true,
+  },
+  lname: {
+    type: String,
   },
   email: {
     type: String,
@@ -17,13 +19,16 @@ const userSchema = new Schema({
   },
   type: {
     type: Number,
+    
+  },
+  blood: {
+    type: Number,
   },
   gender: {
     type: Number,
   },
   password: {
     type: String,
-    minlength: 6,
   },
   blogs: [{ type: mongoose.Types.ObjectId, ref: "Blog", required: true }],
 });

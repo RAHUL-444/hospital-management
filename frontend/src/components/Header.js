@@ -40,12 +40,20 @@ const Header = () => {
                 to="/Home"
                 label="Home"
               />
-              {isLoggedIn.type !== 1 && (
+              {isLoggedIn.type === 3 && (
                 <Tab
                   className={classes.font}
                   LinkComponent={Link}
                   to="/Users"
                   label="All Users"
+                />
+              )}
+              {isLoggedIn.type === 2 && (
+                <Tab
+                  className={classes.font}
+                  LinkComponent={Link}
+                  to="/All-Patients"
+                  label="All Patients"
                 />
               )}
 
