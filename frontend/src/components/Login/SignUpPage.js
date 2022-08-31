@@ -27,7 +27,11 @@ const schema = Yup.object().shape({
     .matches(/^[^\s][a-zA-Z\s]+[^\s]$/, "Only alphabets are allowed"),
   password: Yup.string()
     .required("Password is a required field")
-    .min(8, "Password must be at least 8 characters"),
+    .min(8, "Password must be at least 8 characters")
+       .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+    ),
   gender: Yup.string().required("Gender is a required field"),
   date: Yup.string().required("date is a required field"),
   changepassword: Yup.string().when("password", {
@@ -36,7 +40,11 @@ const schema = Yup.object().shape({
       [Yup.ref("password")],
       "Both password need to be the same"
     ),
-  }),
+  })
+  .matches(
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+  ),
 });
 
 const SignUpPage = (props) => {
