@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { selectUser } from "../store/index";
-
+import Profile from "./profile/Profile";
+import DoctorsBlogs from "./DoctorBlogs";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
@@ -56,47 +57,20 @@ const Home = () => {
           height: "100vh",
           backgroundPosition: "center",
           backgroundSize: "cover",
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-evenly",
+          zIndex: "50",
+          height: "150vh",
+          fontWeight: "800",
+          fontSize: "2.125rem",
+          lineHeight: "1.235",
+          letterSpacing: "0.00735em",
+          color: "black",
         }}
       >
-        <div
-          style={{
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "center",
-            zIndex: "50",
-            // height: "100vh",
-            fontWeight: "800",
-            fontSize: "2.125rem",
-            lineHeight: "1.235",
-            letterSpacing: "0.00735em",
-            color: "black",
-          }}
-        >
-          <div
-            style={{
-              alignItems: "center",
-              display: "flex",
-              justifyContent: "center",
-              zIndex: "50",
-              height: "100vh",
-              fontWeight: "800",
-              fontSize: "2.125rem",
-              lineHeight: "1.235",
-              letterSpacing: "0.00735em",
-              color: "black",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "yellow",
-                textTransform: "uppercase",
-                textAlign: "center",
-              }}
-            >
-              Hi! {user.fname} {user.lname} <br /> Welcome to HOSPITAL MANAGEMENT SYSTEM
-            </div>
-          </div>
-        </div>
+        <div><Profile/></div>
+        <div><DoctorsBlogs/></div>
       </div>
     </>
   );

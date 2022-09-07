@@ -34,12 +34,12 @@ const Header = () => {
         {isLoggedIn && (
           <Box display="flex" marginLeft={"auto"} marginRight="auto">
             <Tabs textColor="inherit" value={value}>
-              <Tab
+              {/* <Tab
                 className={classes.font}
                 LinkComponent={Link}
                 to="/Home"
                 label="Home"
-              />
+              /> */}
               {isLoggedIn.type === 3 && (
                 <Tab
                   className={classes.font}

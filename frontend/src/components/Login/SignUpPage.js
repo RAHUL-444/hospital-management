@@ -261,14 +261,6 @@ const SignUpPage = (props) => {
                 <button type="submit" variant="contained" color="success">
                   Sign Up
                 </button>
-                <Button
-                  onClick={() => naviagte("/Login-Page")}
-                  sx={{ borderRadius: 3, marginTop: 3 }}
-                  variant="contained"
-                  color="primary"
-                >
-                  Already have an account, Login
-                </Button>
               </form>
             </div>
           </div>

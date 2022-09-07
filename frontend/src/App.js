@@ -1,4 +1,5 @@
-import Home from "./components/Home";
+import HomeUser from "./components/Home";
+import Home from "./Home";
 // import Blogs from "./components/Blogs";
 import UserBlogs from "./components/UserBlogs";
 import BlogDetail from "./components/BlogDetail";
@@ -78,11 +79,15 @@ function App() {
         {/* <Route path={`${process.env.PUBLIC_URL + "/"}`} element={<Auth />} /> */}
         <Route
           path={`${process.env.PUBLIC_URL + "/"}`}
-          element={<LoginPage />}
+          element={<Home />}
         />
+        {/* <Route
+          path={`${process.env.PUBLIC_URL + "/"}`}
+          element={<LoginPage />}
+        /> */}
         <Route
           path={`${process.env.PUBLIC_URL + "/Home"}`}
-          element={<Home />}
+          element={<HomeUser />}
         />
         <Route
           path="/Appointment/Create-Appointment"
