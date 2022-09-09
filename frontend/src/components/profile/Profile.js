@@ -93,10 +93,7 @@ const Profile = () => {
             </span>
           </Typography>
           <InputLabel className={classes.font} sx={labelStyles}>
-            First Name : <>{user.fname}</>
-          </InputLabel>
-          <InputLabel className={classes.font} sx={labelStyles}>
-            Last Name : <>{user.lname}</>
+            Full Name : <>{user.fname}</>
           </InputLabel>
           <InputLabel className={classes.font} sx={labelStyles}>
             Email : <>{user.email}</>
@@ -114,14 +111,14 @@ const Profile = () => {
             User Type : <>{userType}</>
           </InputLabel>
         </Box>
-        <Button
+        {/* <Button
           onClick={() => naviagte("/Home")}
           sx={{ borderRadius: 3, marginTop: 3 }}
           variant="contained"
           color="secondary"
         >
           Return to Home
-        </Button>
+        </Button> */}
       </div>
     </>
   );

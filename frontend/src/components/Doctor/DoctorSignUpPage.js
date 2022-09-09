@@ -19,7 +19,10 @@ const schema = Yup.object().shape({
     .required("First Name is a required field")
     .min(1, "Name is too Short")
     .max(20, "Name is too Big")
-    .matches(/^[^\s][a-zA-Z\s]+[^\s]$/, "Only alphabets are allowed"),
+    .matches(
+      /^[A-Z][A-Za-z]*( [A-Z][A-Za-z]*)*$/,
+      "Not a correct format. Eg. Rahul Kumar "
+    ),
   lname: Yup.string()
     .required("Last Name is a required field")
     .min(1, "Name is too Short")
@@ -117,39 +120,19 @@ const DoctorSignUpPage = (props) => {
                 <span>
                   <u>Appointing a Doctor</u>
                 </span>
-                <div className="form-signup-name">
-                  <div className="form-user-type-container-left">
-                    <div className="form-user-type">First Name</div>
-                    <input
-                      type="fname"
-                      name="fname"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.fname}
-                      className="form-control inp_text"
-                      id="fname"
-                    />
-                    <p className="error">
-                      {errors.fname && touched.fname && errors.fname}
-                    </p>
-                  </div>
-
-                  <div className="form-user-type-container">
-                    <div className="form-user-type">Last Name</div>
-                    <input
-                      type="lname"
-                      name="lname"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.lname}
-                      className="form-control inp_text"
-                      id="lname"
-                    />
-                    <p className="error">
-                      {errors.lname && touched.lname && errors.lname}
-                    </p>
-                  </div>
-                </div>
+                <div className="form-user-type">Full Name</div>
+                <input
+                  type="fname"
+                  name="fname"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.fname}
+                  className="form-control inp_text"
+                  id="fname"
+                />
+                <p className="error">
+                  {errors.fname && touched.fname && errors.fname}
+                </p>
 
                 <div className="form-user-type">Email</div>
                 <input

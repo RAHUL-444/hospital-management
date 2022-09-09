@@ -52,25 +52,32 @@ const Home = () => {
     <>
       <div
         style={{
-          // backgroundImage: `url(${process.env.PUBLIC_URL + "/img/home-1.jpg"})`,
-          backgroundRepeat: "no-repeat",
-          height: "100vh",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          alignItems: "center",
           display: "flex",
           justifyContent: "space-evenly",
           zIndex: "50",
-          height: "150vh",
+          // height: "150vh",
           fontWeight: "800",
           fontSize: "2.125rem",
           lineHeight: "1.235",
           letterSpacing: "0.00735em",
           color: "black",
+          width: "50%",
         }}
       >
-        <div><Profile/></div>
-        <div><DoctorsBlogs/></div>
+        <div
+          style={{
+            width: "50%",
+          }}
+        >
+          <Profile />
+        </div>
+        <div
+          style={{
+            width: "50%",
+          }}
+        >
+          <DoctorsBlogs />
+        </div>
       </div>
     </>
   );

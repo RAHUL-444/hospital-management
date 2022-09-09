@@ -19,32 +19,31 @@ const schema = Yup.object().shape({
     .required("First Name is a required field")
     .min(1, "Name is too Short")
     .max(20, "Name is too Big")
-    .matches(/^[^\s][a-zA-Z\s]+[^\s]$/, "Only alphabets are allowed"),
-  lname: Yup.string()
-    .required("Last Name is a required field")
-    .min(1, "Name is too Short")
-    .max(20, "Name is too Big")
-    .matches(/^[^\s][a-zA-Z\s]+[^\s]$/, "Only alphabets are allowed"),
+    .matches(
+      /^[A-Z][A-Za-z]*( [A-Z][A-Za-z]*)*$/,
+      "Not a correct format. Eg. Rahul Kumar "
+    ),
   password: Yup.string()
     .required("Password is a required field")
     .min(8, "Password must be at least 8 characters")
-       .matches(
+    .matches(
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
       "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
     ),
   gender: Yup.string().required("Gender is a required field"),
   date: Yup.string().required("date is a required field"),
-  changepassword: Yup.string().when("password", {
-    is: (val) => (val && val.length > 0 ? true : false),
-    then: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "Both password need to be the same"
+  changepassword: Yup.string()
+    .when("password", {
+      is: (val) => (val && val.length > 0 ? true : false),
+      then: Yup.string().oneOf(
+        [Yup.ref("password")],
+        "Both password need to be the same"
+      ),
+    })
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
     ),
-  })
-  .matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  ),
 });
 
 const SignUpPage = (props) => {
@@ -116,39 +115,20 @@ const SignUpPage = (props) => {
                 <span>
                   <u>Patient Sign Up</u>
                 </span>
-                <div className="form-signup-name">
-                  <div className="form-user-type-container-left">
-                    <div className="form-user-type">First Name</div>
-                    <input
-                      type="fname"
-                      name="fname"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.fname}
-                      className="form-control inp_text"
-                      id="fname"
-                    />
-                    <p className="error">
-                      {errors.fname && touched.fname && errors.fname}
-                    </p>
-                  </div>
 
-                  <div className="form-user-type-container">
-                    <div className="form-user-type">Last Name</div>
-                    <input
-                      type="lname"
-                      name="lname"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.lname}
-                      className="form-control inp_text"
-                      id="lname"
-                    />
-                    <p className="error">
-                      {errors.lname && touched.lname && errors.lname}
-                    </p>
-                  </div>
-                </div>
+                <div className="form-user-type">Full Name</div>
+                <input
+                  type="fname"
+                  name="fname"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.fname}
+                  className="form-control inp_text"
+                  id="fname"
+                />
+                <p className="error">
+                  {errors.fname && touched.fname && errors.fname}
+                </p>
 
                 <div className="form-user-type">Email</div>
                 <input
