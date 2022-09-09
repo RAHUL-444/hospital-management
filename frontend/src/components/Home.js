@@ -60,8 +60,7 @@ const Home = () => {
           fontSize: "2.125rem",
           lineHeight: "1.235",
           letterSpacing: "0.00735em",
-          color: "black",
-          width: "50%",
+          color: "black"
         }}
       >
         <div

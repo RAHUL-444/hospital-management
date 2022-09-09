@@ -7,6 +7,14 @@ import { selectUser } from "../store/index";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
 const UserBlogs = () => {
   const [user, setUser] = useState([]);
   const classes = useStyles();
@@ -49,174 +57,293 @@ const UserBlogs = () => {
     });
 
   return (
-    <>
-      {/* for Admin */}
-
-      <div
-        style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          flexDirection: "column",
-        }}
-      >
-        <Typography
-          className={classes.font}
-          fontWeight={"bold"}
-          padding={3}
-          color="grey"
-          variant="h2"
-          textAlign={"center"}
-        >
-          <u
+    <div
+      style={{
+        display: "flex",
+        marginTop: "10px",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        flexDirection: "column",
+      }}
+    >
+      {" "}
+      {user && allAdmins && (
+        <>
+          <Typography
+            className={classes.font}
+            fontWeight={"bold"}
+            padding={3}
+            color="grey"
+            variant="h2"
+            textAlign={"center"}
+          >
+            <u
+              style={{
+                color: "white",
+                fontSize: "50px",
+              }}
+            >
+              All Admins
+            </u>
+          </Typography>
+          <div
             style={{
-              color: "white",
-              fontSize: "50px",
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            All Admins
-          </u>
-        </Typography>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {user &&
-            userdataFromRedux.type === 3 &&
-            allAdmins.map((blog, index) => (
-              <TableDisplay
-                id={blog._id}
-                key={index}
-                blood={blog.blood}
-                fname={blog.fname}
-                lname={blog.lname}
-                email={blog.email}
-                date={blog.date}
-                type={blog.type}
-                gender={blog.gender}
-              />
-            ))}
-        </div>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          flexDirection: "column",
-        }}
-      >
-        <Typography
-          className={classes.font}
-          fontWeight={"bold"}
-          padding={3}
-          color="grey"
-          variant="h2"
-          textAlign={"center"}
-        >
-          <u
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Full Name</TableCell>
+                    <TableCell align="right">Email</TableCell>
+                    <TableCell align="right">Birthday&nbsp;</TableCell>
+                    <TableCell align="right">Gender&nbsp;</TableCell>
+                    <TableCell align="right">Blood&nbsp;</TableCell>
+                    <TableCell align="right">User Type&nbsp;</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* {user &&
+           userdataFromRedux.blood === 3 &&
+           allAdmins.map((blog, index) => ( */}
+                  {allAdmins.map((blog, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {blog.fname}
+                      </TableCell>
+                      <TableCell align="right">{blog.email}</TableCell>
+                      <TableCell align="right">{blog.date}</TableCell>
+                      <TableCell align="right">
+                        {blog.gender === 1
+                          ? "Male"
+                          : blog.gender === 2
+                          ? "Female"
+                          : "Trans"}
+                      </TableCell>
+                      <TableCell align="right">
+                        {blog.blood === 1
+                          ? "O +ve"
+                          : blog.blood === 2
+                          ? "O -ve"
+                          : blog.blood === 3
+                          ? "B +ve"
+                          : blog.blood === 4
+                          ? "B -ve"
+                          : blog.blood === 5
+                          ? "A +ve"
+                          : blog.blood === 6
+                          ? "A -ve"
+                          : blog.blood === 7
+                          ? "AB +ve"
+                          : blog.blood === 8
+                          ? "AB -ve"
+                          : "NA"}
+                      </TableCell>
+                      <TableCell align="right">
+                        {blog.blood === 1
+                          ? "Patient"
+                          : blog.blood === 2
+                          ? "Doctor"
+                          : "Admin"}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </>
+      )}
+      {user && allPatient && (
+        <>
+          <Typography
+            className={classes.font}
+            fontWeight={"bold"}
+            padding={3}
+            color="grey"
+            variant="h2"
+            textAlign={"center"}
+          >
+            <u
+              style={{
+                color: "white",
+                fontSize: "50px",
+              }}
+            >
+              All Patients
+            </u>
+          </Typography>
+          <div
             style={{
-              color: "white",
-              fontSize: "50px",
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            All Doctors
-          </u>
-        </Typography>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {user &&
-            userdataFromRedux.type === 3 &&
-            allDoctors.map((blog, index) => (
-              <TableDisplay
-                id={blog._id}
-                key={index}
-                blood={blog.blood}
-                fname={blog.fname}
-                lname={blog.lname}
-                email={blog.email}
-                date={blog.date}
-                type={blog.type}
-                gender={blog.gender}
-              />
-            ))}
-        </div>
-      </div>
-
-      {/* for Patient */}
-      <div
-        style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          flexDirection: "column",
-        }}
-      >
-        <Typography
-          className={classes.font}
-          fontWeight={"bold"}
-          padding={3}
-          color="grey"
-          variant="h2"
-          textAlign={"center"}
-        >
-          <u
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Full Name</TableCell>
+                    <TableCell align="right">Email</TableCell>
+                    <TableCell align="right">Birthday&nbsp;</TableCell>
+                    <TableCell align="right">Gender&nbsp;</TableCell>
+                    <TableCell align="right">Blood&nbsp;</TableCell>
+                    <TableCell align="right">User Type&nbsp;</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* {user &&
+             userdataFromRedux.blood === 3 &&
+             allAdmins.map((blog, index) => ( */}
+                  {allPatient.map((blog, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {blog.fname}
+                      </TableCell>
+                      <TableCell align="right">{blog.email}</TableCell>
+                      <TableCell align="right">{blog.date}</TableCell>
+                      <TableCell align="right">
+                        {blog.gender === 1
+                          ? "Male"
+                          : blog.gender === 2
+                          ? "Female"
+                          : "Trans"}
+                      </TableCell>
+                      <TableCell align="right">
+                        {blog.blood === 1
+                          ? "O +ve"
+                          : blog.blood === 2
+                          ? "O -ve"
+                          : blog.blood === 3
+                          ? "B +ve"
+                          : blog.blood === 4
+                          ? "B -ve"
+                          : blog.blood === 5
+                          ? "A +ve"
+                          : blog.blood === 6
+                          ? "A -ve"
+                          : blog.blood === 7
+                          ? "AB +ve"
+                          : blog.blood === 8
+                          ? "AB -ve"
+                          : "NA"}
+                      </TableCell>
+                      <TableCell align="right">
+                        {blog.blood === 1
+                          ? "Patient"
+                          : blog.blood === 2
+                          ? "Doctor"
+                          : "Admin"}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </>
+      )}
+      {user && allDoctors && (
+        <>
+          <Typography
+            className={classes.font}
+            fontWeight={"bold"}
+            padding={3}
+            color="grey"
+            variant="h2"
+            textAlign={"center"}
+          >
+            <u
+              style={{
+                color: "white",
+                fontSize: "50px",
+              }}
+            >
+              All Doctors
+            </u>
+          </Typography>
+          <div
             style={{
-              color: "white",
-              fontSize: "50px",
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            All Patients
-          </u>
-        </Typography>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {user &&
-            allPatient.map((blog, index) => (
-              <TableDisplay
-                id={blog._id}
-                key={index}
-                blood={blog.blood}
-                fname={blog.fname}
-                lname={blog.lname}
-                email={blog.email}
-                date={blog.date}
-                type={blog.type}
-                gender={blog.gender}
-              />
-            ))}
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Button
-          onClick={() => naviagte("/Home")}
-          sx={{ borderRadius: 3, marginTop: 3 }}
-          variant="contained"
-          color="secondary"
-        >
-          Return to Home
-        </Button>
-      </div>
-    </>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Full Name</TableCell>
+                    <TableCell align="right">Email</TableCell>
+                    <TableCell align="right">Birthday&nbsp;</TableCell>
+                    <TableCell align="right">Gender&nbsp;</TableCell>
+                    <TableCell align="right">Blood&nbsp;</TableCell>
+                    <TableCell align="right">User Type&nbsp;</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* {user &&
+             userdataFromRedux.blood === 3 &&
+             allAdmins.map((blog, index) => ( */}
+                  {allDoctors.map((blog, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {blog.fname}
+                      </TableCell>
+                      <TableCell align="right">{blog.email}</TableCell>
+                      <TableCell align="right">{blog.date}</TableCell>
+                      <TableCell align="right">
+                        {blog.gender === 1
+                          ? "Male"
+                          : blog.gender === 2
+                          ? "Female"
+                          : "Trans"}
+                      </TableCell>
+                      <TableCell align="right">
+                        {blog.blood === 1
+                          ? "O +ve"
+                          : blog.blood === 2
+                          ? "O -ve"
+                          : blog.blood === 3
+                          ? "B +ve"
+                          : blog.blood === 4
+                          ? "B -ve"
+                          : blog.blood === 5
+                          ? "A +ve"
+                          : blog.blood === 6
+                          ? "A -ve"
+                          : blog.blood === 7
+                          ? "AB +ve"
+                          : blog.blood === 8
+                          ? "AB -ve"
+                          : "NA"}
+                      </TableCell>
+                      <TableCell align="right">
+                        {blog.blood === 1
+                          ? "Patient"
+                          : blog.blood === 2
+                          ? "Doctor"
+                          : "Admin"}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

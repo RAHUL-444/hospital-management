@@ -34,37 +34,7 @@ const Header = () => {
         {isLoggedIn && (
           <Box display="flex" marginLeft={"auto"} marginRight="auto">
             <Tabs textColor="inherit" value={value}>
-              {/* <Tab
-                className={classes.font}
-                LinkComponent={Link}
-                to="/Home"
-                label="Home"
-              /> */}
-              {isLoggedIn.type === 3 && (
-                <Tab
-                  className={classes.font}
-                  LinkComponent={Link}
-                  to="/Users"
-                  label="All Users"
-                />
-              )}
-              {/* {isLoggedIn.type === 2 && (
-                <Tab
-                  className={classes.font}
-                  LinkComponent={Link}
-                  to="/All-Patients"
-                  label="All Patients"
-                />
-              )}
-
-              <Tab
-                className={classes.font}
-                LinkComponent={Link}
-                to="/Profile"
-                label="My Profile"
-              /> */}
-
-              {isLoggedIn.type !== 1 && isLoggedIn.type !== 2 &&(
+              {isLoggedIn.type !== 1 && isLoggedIn.type !== 2 && (
                 <Tab
                   className={classes.font}
                   LinkComponent={Link}
