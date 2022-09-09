@@ -105,9 +105,6 @@ const UserBlogs = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {/* {user &&
-           userdataFromRedux.blood === 3 &&
-           allAdmins.map((blog, index) => ( */}
                   {allAdmins.map((blog, index) => (
                     <TableRow
                       key={index}

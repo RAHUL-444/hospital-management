@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { selectUser } from "../store/index";
 import Profile from "./profile/Profile";
 import DoctorsBlogs from "./DoctorBlogs";
+import UserBlogs from "./UserBlogs";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
@@ -48,6 +49,7 @@ const Home = () => {
     user.type,
     user.id,
   ]);
+  console.log(user);
   return (
     <>
       <div
@@ -60,7 +62,7 @@ const Home = () => {
           fontSize: "2.125rem",
           lineHeight: "1.235",
           letterSpacing: "0.00735em",
-          color: "black"
+          color: "black",
         }}
       >
         <div
@@ -73,9 +75,12 @@ const Home = () => {
         <div
           style={{
             width: "50%",
+            marginRight: "100px",
+            marginBottom: "100px",
           }}
         >
-          <DoctorsBlogs />
+          {user.type === 2 && <DoctorsBlogs />}
+          {user.type === 3 && <UserBlogs />}
         </div>
       </div>
     </>
