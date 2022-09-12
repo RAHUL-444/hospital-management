@@ -5,7 +5,6 @@ import { sendRequest } from "../../api/Api";
 import { useNavigate } from "react-router-dom";
 import ToastN from "../../feature/ToastN";
 import MenuItem from "@mui/material/MenuItem";
-import { login } from "../../store/index";
 import { useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import Select from "@mui/material/Select";
@@ -23,11 +22,6 @@ const schema = Yup.object().shape({
       /^[A-Z][A-Za-z]*( [A-Z][A-Za-z]*)*$/,
       "Not a correct format. Eg. Rahul Kumar "
     ),
-  lname: Yup.string()
-    .required("Last Name is a required field")
-    .min(1, "Name is too Short")
-    .max(20, "Name is too Big")
-    .matches(/^[^\s][a-zA-Z\s]+[^\s]$/, "Only alphabets are allowed"),
   password: Yup.string()
     .required("Password is a required field")
     .min(8, "Password must be at least 8 characters")
@@ -51,12 +45,23 @@ const schema = Yup.object().shape({
     ),
 });
 
+function camelize(text) {
+  const words = text.split(" ");
+
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] && words[i].length > 0) {
+      words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+    }
+  }
+
+  return words.join(" ");
+}
 const DoctorSignUpPage = (props) => {
   const naviagte = useNavigate();
   const dispatch = useDispatch();
+
   return (
     <>
-      {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
       <Formik
         validationSchema={schema}
         initialValues={{
@@ -86,7 +91,7 @@ const DoctorSignUpPage = (props) => {
           };
           sendRequest("signup", data).then((res) => {
             if (res.status === 200) {
-              ToastN("Appointing a Doctor was Successfull", "success");
+              ToastN("Sign up Successfull", "success");
               // dispatch(
               //   login({
               //     fname: res.user.fname,
@@ -106,157 +111,168 @@ const DoctorSignUpPage = (props) => {
           });
         }}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-        }) => (
-          <div className="login">
-            <div className="form-signup">
-              <form noValidate onSubmit={handleSubmit}>
-                <span>
-                  <u>Appointing a Doctor</u>
-                </span>
-                <div className="form-user-type">Full Name</div>
-                <input
-                  type="fname"
-                  name="fname"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.fname}
-                  className="form-control inp_text"
-                  id="fname"
-                />
-                <p className="error">
-                  {errors.fname && touched.fname && errors.fname}
-                </p>
+        {(props) => {
+          const {
+            values,
+            touched,
+            errors,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+          } = props;
 
-                <div className="form-user-type">Email</div>
-                <input
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  className="form-control inp_text"
-                  id="email"
-                />
-                <p className="error">
-                  {errors.email && touched.email && errors.email}
-                </p>
+          const handleChangeWithCamelize = (e) => {
+            const copyE = { ...e };
+            copyE.target.value = camelize(copyE.target.value);
+            handleChange(e);
+          };
 
-                <div className="form-signup-name">
-                  <div className="form-user-type-container-left">
-                    <div className="form-user-type">Gender</div>
-                    <Select
-                      name="gender"
-                      type="gender"
-                      id="gender"
-                      value={values.gender}
-                      sx={{ width: 360 }}
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={1}>Male</MenuItem>
-                      <MenuItem value={2}>Female</MenuItem>
-                      <MenuItem value={3}>Others</MenuItem>
-                    </Select>
-                    <p className="error">
-                      {errors.gender && touched.gender && errors.gender}
-                    </p>
+          return (
+            <div className="login">
+              <div className="form-signup">
+                <form noValidate onSubmit={handleSubmit}>
+                  <span>
+                    <u>Doctor Sign Up</u>
+                  </span>
+
+                  <div className="form-user-type">Full Name</div>
+                  <input
+                    type="fname"
+                    name="fname"
+                    onChange={handleChangeWithCamelize}
+                    onBlur={handleBlur}
+                    value={values.fname}
+                    className="form-control inp_text"
+                    id="fname"
+                  />
+                  <p className="error">
+                    {errors.fname && touched.fname && errors.fname}
+                  </p>
+
+                  <div className="form-user-type">Email</div>
+                  <input
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    className="form-control inp_text"
+                    id="email"
+                  />
+                  <p className="error">
+                    {errors.email && touched.email && errors.email}
+                  </p>
+
+                  <div className="form-signup-name">
+                    <div className="form-user-type-container-left">
+                      <div className="form-user-type">Gender</div>
+                      <Select
+                        name="gender"
+                        type="gender"
+                        id="gender"
+                        value={values.gender}
+                        sx={{ width: 360 }}
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={1}>Male</MenuItem>
+                        <MenuItem value={2}>Female</MenuItem>
+                        <MenuItem value={3}>Others</MenuItem>
+                      </Select>
+                      <p className="error">
+                        {errors.gender && touched.gender && errors.gender}
+                      </p>
+                    </div>
+
+                    <div className="form-user-type-container">
+                      <div className="form-user-type">BLood Group</div>
+                      <Select
+                        name="blood"
+                        type="blood"
+                        value={values.blood}
+                        id="blood"
+                        sx={{ width: 340 }}
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={1}>O +ve</MenuItem>
+                        <MenuItem value={2}>O -ve</MenuItem>
+                        <MenuItem value={3}>B +ve</MenuItem>
+                        <MenuItem value={4}>B -ve</MenuItem>
+                        <MenuItem value={5}>A +ve</MenuItem>
+                        <MenuItem value={6}>A +ve</MenuItem>
+                        <MenuItem value={7}>AB -ve</MenuItem>
+                        <MenuItem value={8}>AB -ve</MenuItem>
+                      </Select>
+
+                      <p className="error">
+                        {errors.blood && touched.blood && errors.blood}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="form-user-type-container">
-                    <div className="form-user-type">BLood Group</div>
-                    <Select
-                      name="blood"
-                      type="blood"
-                      value={values.blood}
-                      id="blood"
-                      sx={{ width: 340 }}
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={1}>O +ve</MenuItem>
-                      <MenuItem value={2}>O -ve</MenuItem>
-                      <MenuItem value={3}>B +ve</MenuItem>
-                      <MenuItem value={4}>B -ve</MenuItem>
-                      <MenuItem value={5}>A +ve</MenuItem>
-                      <MenuItem value={6}>A +ve</MenuItem>
-                      <MenuItem value={7}>AB -ve</MenuItem>
-                      <MenuItem value={8}>AB -ve</MenuItem>
-                    </Select>
+                  <div className="form-user-type">Date of Birth</div>
+                  <input
+                    name="date"
+                    type="date"
+                    onChange={handleChange}
+                    value={values.date}
+                    id="date"
+                    defaultValue="2022-08-19"
+                    sx={{ width: 340 }}
+                  />
+                  <p className="error">
+                    {errors.date && touched.date && errors.date}
+                  </p>
 
-                    <p className="error">
-                      {errors.blood && touched.blood && errors.blood}
-                    </p>
-                  </div>
-                </div>
+                  <div className="form-signup-name">
+                    <div className="form-user-type-container-left">
+                      <div className="form-user-type">Password</div>
+                      <input
+                        type="password"
+                        name="password"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.password}
+                        className="form-control"
+                      />
+                      <p className="error">
+                        {errors.password && touched.password && errors.password}
+                      </p>
+                    </div>
 
-                <div className="form-user-type">Date of Birth</div>
-                <input
-                  name="date"
-                  type="date"
-                  onChange={handleChange}
-                  value={values.date}
-                  id="date"
-                  defaultValue="2022-08-19"
-                  sx={{ width: 340 }}
-                />
-                <p className="error">
-                  {errors.date && touched.date && errors.date}
-                </p>
-
-                <div className="form-signup-name">
-                  <div className="form-user-type-container-left">
-                    <div className="form-user-type">Password</div>
-                    <input
-                      type="password"
-                      name="password"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
-                      className="form-control"
-                    />
-                    <p className="error">
-                      {errors.password && touched.password && errors.password}
-                    </p>
+                    <div className="form-user-type-container">
+                      <div className="form-user-type">Confirm Password</div>
+                      <input
+                        type="password"
+                        name="changepassword"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.changepassword}
+                        className="form-control"
+                      />
+                      <p className="error">
+                        {errors.changepassword &&
+                          touched.changepassword &&
+                          errors.changepassword}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="form-user-type-container">
-                    <div className="form-user-type">Confirm Password</div>
-                    <input
-                      type="password"
-                      name="changepassword"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.changepassword}
-                      className="form-control"
-                    />
-                    <p className="error">
-                      {errors.changepassword &&
-                        touched.changepassword &&
-                        errors.changepassword}
-                    </p>
-                  </div>
-                </div>
-
-                <button type="submit" variant="contained" color="success">
-                  Sign Up
-                </button>
-                <Button
-                  onClick={() => naviagte("/Home")}
-                  sx={{ borderRadius: 3, marginTop: 3 }}
-                  variant="contained"
-                  color="primary"
-                >
-                  Cancel creating and return Home
-                </Button>
-              </form>
+                  <button type="submit" variant="contained" color="success">
+                    Adding Doctor
+                  </button>
+                  <Button
+                    onClick={() => naviagte("/Home")}
+                    sx={{ borderRadius: 3, marginTop: 3 }}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Cancel creating and return Home
+                  </Button>
+                </form>
+              </div>
             </div>
-          </div>
-        )}
+          );
+        }}
       </Formik>
     </>
   );

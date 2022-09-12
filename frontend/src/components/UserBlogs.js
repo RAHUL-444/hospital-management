@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import TableDisplay from "./TableDisplay";
 import { useStyles } from "./utils";
-import { useSelector } from "react-redux";
-import { selectUser } from "../store/index";
+// import { useSelector } from "react-redux";
+// import { selectUser } from "../store/index";
 import { Typography } from "@mui/material";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -18,8 +16,8 @@ import Paper from "@mui/material/Paper";
 const UserBlogs = () => {
   const [user, setUser] = useState([]);
   const classes = useStyles();
-  const userdataFromRedux = useSelector(selectUser);
-  const naviagte = useNavigate();
+  // const userdataFromRedux = useSelector(selectUser);
+  // const naviagte = useNavigate();
   const sendRequest = async () => {
     const res = await axios
       .get(`http://localhost:5000/api/user/`)
@@ -142,9 +140,9 @@ const UserBlogs = () => {
                           : "NA"}
                       </TableCell>
                       <TableCell align="right">
-                        {blog.blood === 1
+                        {blog.type === 1
                           ? "Patient"
-                          : blog.blood === 2
+                          : blog.type === 2
                           ? "Doctor"
                           : "Admin"}
                       </TableCell>
@@ -234,9 +232,9 @@ const UserBlogs = () => {
                           : "NA"}
                       </TableCell>
                       <TableCell align="right">
-                        {blog.blood === 1
+                        {blog.type === 1
                           ? "Patient"
-                          : blog.blood === 2
+                          : blog.type === 2
                           ? "Doctor"
                           : "Admin"}
                       </TableCell>
@@ -326,9 +324,9 @@ const UserBlogs = () => {
                           : "NA"}
                       </TableCell>
                       <TableCell align="right">
-                        {blog.blood === 1
+                        {blog.type === 1
                           ? "Patient"
-                          : blog.blood === 2
+                          : blog.type === 2
                           ? "Doctor"
                           : "Admin"}
                       </TableCell>

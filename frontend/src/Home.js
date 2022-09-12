@@ -5,11 +5,9 @@ const Home = () => {
   return (
     <div
     style={{
-      alignItems: "center",
       display: "flex",
       justifyContent: "space-evenly",
       zIndex: "50",
-      height: "150vh",
       fontWeight: "800",
       fontSize: "2.125rem",
       lineHeight: "1.235",
