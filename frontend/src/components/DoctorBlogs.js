@@ -43,7 +43,6 @@ const DoctorBlogs = () => {
       style={{
         display: "flex",
         marginTop: "10px",
-        justifyContent: "center",
         flexWrap: "wrap",
         flexDirection: "column",
       }}
