@@ -11,6 +11,7 @@ import Select from "@mui/material/Select";
 
 const schema = Yup.object().shape({
   blood: Yup.string().required("User Type is a required field"),
+  type: Yup.string().required("User Type is a required field"),
   email: Yup.string()
     .required("Email is a required field")
     .email("Invalid email format"),
@@ -129,6 +130,26 @@ const DoctorSignUpPage = (props) => {
                   <span>
                     <u>User Sign Up</u>
                   </span>
+                  <div>
+                    <div className="form-user-type">User Type</div>
+                    <Select
+                      name="type"
+                      type="type"
+                      value={values.type}
+                      label="Age"
+                      id="type"
+                      sx={{ width: 593, height: 45 }}
+                      onChange={handleChange}
+                      className="form-control inp_text"
+                    >
+                      <MenuItem value={1}>Patient</MenuItem>
+                      <MenuItem value={2}>Doctor</MenuItem>
+                      <MenuItem value={3}>Admin</MenuItem>
+                    </Select>
+                  </div>
+                  <p className="error">
+                    {errors.type && touched.type && errors.type}
+                  </p>
 
                   <div className="form-user-type">Full Name</div>
                   <input
@@ -143,26 +164,7 @@ const DoctorSignUpPage = (props) => {
                   <p className="error">
                     {errors.fname && touched.fname && errors.fname}
                   </p>
-                  <div>
-                  <div className="form-user-type">User Type</div>
-                  <Select
-                    name="type"
-                    type="type"
-                    value={values.type}
-                    label="Age"
-                    id="type"
-                    sx={{ width: 593, height: 45 }}
-                    onChange={handleChange}
-                    className="form-control inp_text"
-                  >
-                    <MenuItem value={1}>Patient</MenuItem>
-                    <MenuItem value={2}>Doctor</MenuItem>
-                    <MenuItem value={3}>Admin</MenuItem>
-                  </Select>
-                </div>
-                <p className="error">
-                  {errors.type && touched.type && errors.type}
-                </p>
+
                   <div className="form-user-type">Email</div>
                   <input
                     type="email"
@@ -274,7 +276,6 @@ const DoctorSignUpPage = (props) => {
                   <button type="submit" variant="contained" color="success">
                     Adding User
                   </button>
-                 
                 </form>
               </div>
             </div>

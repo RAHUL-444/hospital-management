@@ -86,7 +86,7 @@ const LoginPage = (props) => {
                     value={values.type}
                     label="Age"
                     id="type"
-                    sx={{ width: 360, height: 45 }}
+                    sx={{ width: 173, height: 45 }}
                     onChange={handleChange}
                   >
                     <MenuItem value={1}>Patient</MenuItem>

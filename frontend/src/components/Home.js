@@ -51,9 +51,13 @@ const Home = () => {
     user.type,
     user.id,
   ]);
-  console.log(user);
   return (
     <>
+      {user.type === 1 && (
+        <div>
+          <Profile />
+        </div>
+      )}
       <div
         style={{
           display: "flex",
@@ -67,42 +71,34 @@ const Home = () => {
           color: "black",
         }}
       >
-        {user.type === 1 && (
-          <div
-            style={{
-              width: "50%",
-            }}
-          >
-            <Profile />
-          </div>
-        )}
-        {user.type === 2 && (
-          <div
-            style={{
-              width: "50%",
-            }}
-          >
-            <PatientSignUpPage />
-          </div>
-        )}
-        {user.type === 3 && (
-          <div
-            style={{
-              width: "50%",
-            }}
-          >
-            <DoctorSignUpPage />
-          </div>
-        )}
+        {user.type === 2 && <DoctorsBlogs />}
+        {user.type === 3 && <UserBlogs />}
+
         <div
-          style={{
-            width: "50%",
-            marginRight: "100px",
-            marginBottom: "100px",
-          }}
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          zIndex: "50",
+          // height: "150vh",
+          fontWeight: "800",
+          fontSize: "2.125rem",
+          lineHeight: "1.235",
+          letterSpacing: "0.00735em",
+          color: "black",
+        }}
         >
-          {user.type === 2 && <DoctorsBlogs />}
-          {user.type === 3 && <UserBlogs />}
+          {user.type === 2 && (
+            <div
+            >
+              <PatientSignUpPage />
+            </div>
+          )}
+          {user.type === 3 && (
+            <div
+            >
+              <DoctorSignUpPage />
+            </div>
+          )}
         </div>
       </div>
     </>
