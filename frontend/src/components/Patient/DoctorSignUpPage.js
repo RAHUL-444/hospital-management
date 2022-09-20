@@ -1,11 +1,10 @@
-import "./SignUpPage.css";
+import "./DoctorSignUpPage.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { sendRequest } from "../../api/Api";
 import { useNavigate } from "react-router-dom";
 import ToastN from "../../feature/ToastN";
 import MenuItem from "@mui/material/MenuItem";
-import { login } from "../../store/index";
 import { useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import Select from "@mui/material/Select";
@@ -52,7 +51,7 @@ function camelize(text) {
 
   return words.join(" ");
 }
-const SignUpPage = (props) => {
+const DoctorSignUpPage = (props) => {
   const naviagte = useNavigate();
   const dispatch = useDispatch();
 
@@ -88,20 +87,20 @@ const SignUpPage = (props) => {
           sendRequest("signup", data).then((res) => {
             if (res.status === 200) {
               ToastN("Sign up Successfull", "success");
-              dispatch(
-                login({
-                  fname: res.user.fname,
-                  lname: res.user.lname,
-                  email: res.user.email,
-                  password: res.user.password,
-                  blood: res.user.blood,
-                  gender: res.user.gender,
-                  date: res.user.date,
-                  type: res.user.type,
-                  id: res.user._id,
-                  isloggedIN: true,
-                })
-              );
+              // dispatch(
+              //   login({
+              //     fname: res.user.fname,
+              //     lname: res.user.lname,
+              //     email: res.user.email,
+              //     password: res.user.password,
+              //     blood: res.user.blood,
+              //     gender: res.user.gender,
+              //     date: res.user.date,
+              //     type: res.user.type,
+              //     id: res.user._id,
+              //     isloggedIN: true,
+              //   })
+              // );
               naviagte("/Home");
             }
           });
@@ -112,12 +111,9 @@ const SignUpPage = (props) => {
             values,
             touched,
             errors,
-            dirty,
-            isSubmitting,
             handleChange,
             handleBlur,
             handleSubmit,
-            handleReset,
           } = props;
 
           const handleChangeWithCamelize = (e) => {
@@ -170,7 +166,7 @@ const SignUpPage = (props) => {
                         type="gender"
                         id="gender"
                         value={values.gender}
-                        sx={{ width: 360 }}
+                        sx={{ width: 280 }}
                         onChange={handleChange}
                       >
                         <MenuItem value={1}>Male</MenuItem>
@@ -189,7 +185,7 @@ const SignUpPage = (props) => {
                         type="blood"
                         value={values.blood}
                         id="blood"
-                        sx={{ width: 340 }}
+                        sx={{ width: 280 }}
                         onChange={handleChange}
                       >
                         <MenuItem value={1}>O +ve</MenuItem>
@@ -257,8 +253,9 @@ const SignUpPage = (props) => {
                   </div>
 
                   <button type="submit" variant="contained" color="success">
-                    Sign Up
+                    Adding Patient
                   </button>
+                  
                 </form>
               </div>
             </div>
@@ -269,4 +266,4 @@ const SignUpPage = (props) => {
   );
 };
 
-export default SignUpPage;
+export default DoctorSignUpPage;

@@ -31,7 +31,7 @@ const Header = () => {
         <Typography className={classes.font} variant="h4">
           HOSPITAL MANAGEMENT SYSTEM
         </Typography>
-        {isLoggedIn && (
+        {/* {isLoggedIn && (
           <Box display="flex" marginLeft={"auto"} marginRight="auto">
             <Tabs textColor="inherit" value={value}>
               {isLoggedIn.type !== 1 && isLoggedIn.type !== 2 && (
@@ -44,7 +44,7 @@ const Header = () => {
               )}
             </Tabs>
           </Box>
-        )}
+        )} */}
         <Box display="flex" marginLeft="auto">
           {isLoggedIn && (
             <Button

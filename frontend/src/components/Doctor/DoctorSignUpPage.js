@@ -31,14 +31,13 @@ const schema = Yup.object().shape({
     ),
   gender: Yup.string().required("Gender is a required field"),
   date: Yup.string().required("date is a required field"),
-  changepassword: Yup.string()
-    .when("password", {
-      is: (val) => (val && val.length > 0 ? true : false),
-      then: Yup.string().oneOf(
-        [Yup.ref("password")],
-        "Both password need to be the same"
-      ),
-    })
+  changepassword: Yup.string().when("password", {
+    is: (val) => (val && val.length > 0 ? true : false),
+    then: Yup.string().oneOf(
+      [Yup.ref("password")],
+      "Both password need to be the same"
+    ),
+  }),
 });
 
 function camelize(text) {
@@ -81,7 +80,7 @@ const DoctorSignUpPage = (props) => {
             blood: values.blood,
             gender: values.gender,
             date: values.date,
-            type: 2,
+            type: values.type,
             id: values._id,
             isloggedIN: true,
           };
@@ -128,7 +127,7 @@ const DoctorSignUpPage = (props) => {
               <div className="form-signup">
                 <form noValidate onSubmit={handleSubmit}>
                   <span>
-                    <u>Doctor Sign Up</u>
+                    <u>User Sign Up</u>
                   </span>
 
                   <div className="form-user-type">Full Name</div>
@@ -144,7 +143,26 @@ const DoctorSignUpPage = (props) => {
                   <p className="error">
                     {errors.fname && touched.fname && errors.fname}
                   </p>
-
+                  <div>
+                  <div className="form-user-type">User Type</div>
+                  <Select
+                    name="type"
+                    type="type"
+                    value={values.type}
+                    label="Age"
+                    id="type"
+                    sx={{ width: 593, height: 45 }}
+                    onChange={handleChange}
+                    className="form-control inp_text"
+                  >
+                    <MenuItem value={1}>Patient</MenuItem>
+                    <MenuItem value={2}>Doctor</MenuItem>
+                    <MenuItem value={3}>Admin</MenuItem>
+                  </Select>
+                </div>
+                <p className="error">
+                  {errors.type && touched.type && errors.type}
+                </p>
                   <div className="form-user-type">Email</div>
                   <input
                     type="email"
@@ -167,7 +185,7 @@ const DoctorSignUpPage = (props) => {
                         type="gender"
                         id="gender"
                         value={values.gender}
-                        sx={{ width: 360 }}
+                        sx={{ width: 280 }}
                         onChange={handleChange}
                       >
                         <MenuItem value={1}>Male</MenuItem>
@@ -186,7 +204,7 @@ const DoctorSignUpPage = (props) => {
                         type="blood"
                         value={values.blood}
                         id="blood"
-                        sx={{ width: 340 }}
+                        sx={{ width: 280 }}
                         onChange={handleChange}
                       >
                         <MenuItem value={1}>O +ve</MenuItem>
@@ -254,16 +272,9 @@ const DoctorSignUpPage = (props) => {
                   </div>
 
                   <button type="submit" variant="contained" color="success">
-                    Adding Doctor
+                    Adding User
                   </button>
-                  <Button
-                    onClick={() => naviagte("/Home")}
-                    sx={{ borderRadius: 3, marginTop: 3 }}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Cancel creating and return Home
-                  </Button>
+                 
                 </form>
               </div>
             </div>

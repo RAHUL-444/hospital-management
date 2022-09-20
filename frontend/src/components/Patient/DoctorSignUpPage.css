@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
+
+body {
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+}
+
+.login {
+  padding: 2% 0 0;
+  margin: auto;
+  font-family: "Comfortaa", cursive;
+  width: 90%;
+}
+
+.form-signup {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 45px;
+  text-align: center;
+}
+
+.form-signup-user-type {
+  font-size: 14px;
+  font-family: "Comfortaa", cursive;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  margin-left: 15px;
+}
+
+.form-signup input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: "Comfortaa", cursive;
+}
+
+.form-signup input:focus {
+  background: #dbdbdb;
+}
+
+.form-signup button {
+  font-family: "Comfortaa", cursive;
+  text-transform-signup: uppercase;
+  outline: 0;
+  background: #4b6cb7;
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  /* margin-top: 15px;
+  margin-bottom: 15px; */
+  cursor: pointer;
+}
+
+.form-signup button:active {
+  background: #395591;
+}
+
+.form-signup span {
+  font-size: 35px;
+  color: #4b6cb7;
+}
+
+.error {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: red;
+}
+.form-signup-name {
+  display: flex;
+  margin-top: 35px;
+}
+
+.form-user-type-container-left {
+  margin-right: 15px;
+  width: 350px;
+}
+.form-user-type-container {
+  /* margin-right: 15px; */
+  width: 350px;
+}

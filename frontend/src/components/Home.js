@@ -6,6 +6,8 @@ import UserBlogs from "./UserBlogs";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
+import PatientSignUpPage from "./Patient/DoctorSignUpPage";
+import DoctorSignUpPage from "./Doctor/DoctorSignUpPage";
 import { login } from "../store/index";
 const Home = () => {
   const user = useSelector(selectUser);
@@ -65,13 +67,33 @@ const Home = () => {
           color: "black",
         }}
       >
-        <div
-          style={{
-            width: "50%",
-          }}
-        >
-          <Profile />
-        </div>
+        {user.type === 1 && (
+          <div
+            style={{
+              width: "50%",
+            }}
+          >
+            <Profile />
+          </div>
+        )}
+        {user.type === 2 && (
+          <div
+            style={{
+              width: "50%",
+            }}
+          >
+            <PatientSignUpPage />
+          </div>
+        )}
+        {user.type === 3 && (
+          <div
+            style={{
+              width: "50%",
+            }}
+          >
+            <DoctorSignUpPage />
+          </div>
+        )}
         <div
           style={{
             width: "50%",
