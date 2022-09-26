@@ -32,13 +32,21 @@ const schema = Yup.object().shape({
     ),
   gender: Yup.string().required("Gender is a required field"),
   date: Yup.string().required("date is a required field"),
-  changepassword: Yup.string().when("password", {
-    is: (val) => (val && val.length > 0 ? true : false),
-    then: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "Both password need to be the same"
-    ),
-  }),
+  changepassword: Yup.string()
+    .required("Password is a required field")
+    .min(8, "Password must be at least 8 characters")
+
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+    )
+    .when("password", {
+      is: (val) => (val && val.length > 0 ? true : false),
+      then: Yup.string().oneOf(
+        [Yup.ref("password")],
+        "Both password need to be the same"
+      ),
+    }),
 });
 
 function camelize(text) {
@@ -125,7 +133,6 @@ const SignUpPage = (props) => {
             copyE.target.value = camelize(copyE.target.value);
             handleChange(e);
           };
-
           return (
             <div className="login">
               <div className="form-signup">
@@ -170,7 +177,7 @@ const SignUpPage = (props) => {
                         type="gender"
                         id="gender"
                         value={values.gender}
-                        sx={{ width: 360 }}
+                        sx={{ width: 280 }}
                         onChange={handleChange}
                       >
                         <MenuItem value={1}>Male</MenuItem>
@@ -189,7 +196,7 @@ const SignUpPage = (props) => {
                         type="blood"
                         value={values.blood}
                         id="blood"
-                        sx={{ width: 340 }}
+                        sx={{ width: 280 }}
                         onChange={handleChange}
                       >
                         <MenuItem value={1}>O +ve</MenuItem>
@@ -235,6 +242,9 @@ const SignUpPage = (props) => {
                       />
                       <p className="error">
                         {errors.password && touched.password && errors.password}
+
+                        {values.changepassword !== values.password &&
+                          "Both password need to be the same"}
                       </p>
                     </div>
 

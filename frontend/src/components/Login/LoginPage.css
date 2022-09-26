@@ -15,10 +15,11 @@ body {
   z-index: 1;
   background: #FFFFFF;
   border-radius: 10px;
-  max-width: 360px;
+  margin-top: 12px!important;
   margin: 0 auto ;
   padding: 45px;
   text-align: center;
+  width: 100%;
 }
 
 .form-user-type{
