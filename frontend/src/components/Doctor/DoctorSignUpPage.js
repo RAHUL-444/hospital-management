@@ -9,6 +9,10 @@ import { useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import Select from "@mui/material/Select";
 
+import ClearIcon from "@mui/icons-material/Clear";
+import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
+import { pink } from "@mui/material/colors";
+import { useState } from "react";
 const schema = Yup.object().shape({
   blood: Yup.string().required("User Type is a required field"),
   type: Yup.string().required("User Type is a required field"),
@@ -53,9 +57,49 @@ function camelize(text) {
   return words.join(" ");
 }
 const DoctorSignUpPage = (props) => {
+  const [charNumberValid, setCharNumberValid] = useState(false);
+  const [specialCharValid, setSpecialCharValid] = useState(false);
+  const [uppercaseValid, setUppercaseValid] = useState(false);
+  const [numberValid, serNumberValid] = useState(false);
   const naviagte = useNavigate();
   const dispatch = useDispatch();
+  const checkPasswordLength = (password) => {
+    if (password.length >= 8) {
+      setCharNumberValid(true);
+    } else {
+      setCharNumberValid(false);
+    }
+  };
 
+  // Check for special characters
+  const checkSpecialCharacters = (password) => {
+    const pattern = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
+    if (pattern.test(password)) {
+      setSpecialCharValid(true);
+    } else {
+      setSpecialCharValid(false);
+    }
+  };
+
+  // Check for an uppercase character
+  const checkUppercase = (password) => {
+    const pattern = /[A-Z]/;
+    if (pattern.test(password)) {
+      setUppercaseValid(true);
+    } else {
+      setUppercaseValid(false);
+    }
+  };
+
+  // Check for a number
+  const checkNumber = (password) => {
+    const pattern = /[0-9]/;
+    if (pattern.test(password)) {
+      serNumberValid(true);
+    } else {
+      serNumberValid(false);
+    }
+  };
   return (
     <>
       <Formik
@@ -245,7 +289,13 @@ const DoctorSignUpPage = (props) => {
                       <input
                         type="password"
                         name="password"
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          handleChange(e);
+                          checkNumber(e.target.value);
+                          checkUppercase(e.target.value);
+                          checkSpecialCharacters(e.target.value);
+                          checkPasswordLength(e.target.value);
+                        }}
                         onBlur={handleBlur}
                         value={values.password}
                         className="form-control"
@@ -253,6 +303,43 @@ const DoctorSignUpPage = (props) => {
                       <p className="error">
                         {errors.password && touched.password && errors.password}
                       </p>
+                      <div className="validation">
+                        <div className="validator">
+                          {charNumberValid ? (
+                            <CheckCircleOutlineOutlinedIcon />
+                          ) : (
+                            <ClearIcon sx={{ color: pink[500] }} />
+                          )}
+                          <p className="validation-item"> 8-20 characters</p>
+                        </div>
+                        <div className="validator">
+                          {specialCharValid ? (
+                            <CheckCircleOutlineOutlinedIcon />
+                          ) : (
+                            <ClearIcon sx={{ color: pink[500] }} />
+                          )}
+                          <p className="validation-item">
+                            {" "}
+                            1 special character
+                          </p>
+                        </div>
+                        <div className="validator">
+                          {uppercaseValid ? (
+                            <CheckCircleOutlineOutlinedIcon />
+                          ) : (
+                            <ClearIcon sx={{ color: pink[500] }} />
+                          )}
+                          <p className="validation-item"> 1 uppercase letter</p>
+                        </div>
+                        <div className="validator">
+                          {numberValid ? (
+                            <CheckCircleOutlineOutlinedIcon />
+                          ) : (
+                            <ClearIcon sx={{ color: pink[500] }} />
+                          )}
+                          <p className="validation-item"> 1 number</p>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="form-user-type-container">
@@ -273,9 +360,14 @@ const DoctorSignUpPage = (props) => {
                     </div>
                   </div>
 
-                  <button type="submit" variant="contained" color="success">
-                    Adding User
-                  </button>
+                  {charNumberValid &&
+                    specialCharValid &&
+                    uppercaseValid &&
+                    numberValid && (
+                      <button type="submit" variant="contained" color="success">
+                        Adding User
+                      </button>
+                    )}
                 </form>
               </div>
             </div>

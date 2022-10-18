@@ -98,3 +98,42 @@ body {
   /* margin-right: 15px; */
   width: 350px;
 }
+
+.validation {
+  /* // display: flex; */
+  flex-direction: column;
+  justify-content: space-around;
+  box-sizing: border-box;
+  margin-bottom: 1em;
+  font-size: 20px;
+}
+
+.validation-item {
+  margin-bottom: 0.85em
+}
+
+.validation-icon {
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 1.25em;
+}
+
+.validator {
+  display: flex;
+}
+
+.error-block {
+  /* @extend .validation-icon; */
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 1.25em;
+  color: #F2180A;
+}
+
+.success-block {
+  /* @extend .validation-icon; */
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 1.25em;
+  color: #11AF41;
+}
